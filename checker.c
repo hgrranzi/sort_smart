@@ -14,8 +14,17 @@ void	display_error()
 
 int		main(int argc, char **argv)
 {
-	if (argc < 2)
-		display_error();
-	write(1, "Checker works\n", 14);
+	int	i;
+
+	i = 1;
+	if (argc > 1)
+	{
+		write(1, "Checker works\n", 14);
+		while (i < argc)
+		{
+			printf("%d\n", aka_atoi(argv[i]));
+			i++;
+		}
+	}
 	return (0);
 }

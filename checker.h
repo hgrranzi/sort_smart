@@ -9,6 +9,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct	s_stack
 {
@@ -19,5 +20,8 @@ typedef struct	s_stack
 
 
 void	display_error();
+
+int		aka_atoi(char *str);
+int		aka_isdigit(char c);
 
 #endif
