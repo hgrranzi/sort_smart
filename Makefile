@@ -4,7 +4,7 @@ COMPILE = gcc -c
 
 LINK = gcc -Wall -Wextra -Werror
 
-SRCS = checker.c checker_utils.c
+SRCS = checker.c checker_utils.c stack.c
 
 OBJS =	$(SRCS:.c=.o)
 
