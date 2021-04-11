@@ -46,3 +46,20 @@ void	destroy_stack(t_stack *stack)
 	stack->status = 0;
 	stack->size = 0;
 }
+
+void	print_stack(t_stack *stack) // probably will be better with my own printf
+{
+	int	i;
+
+	i = 0;
+	write(1, "---\n", 4);
+	while (i < stack->status)
+	{
+		aka_putchar('|');
+		aka_putnbr(stack->data[i]);
+		aka_putchar('|');
+		aka_putchar('\n');
+		i++;
+	}
+	write(1, "---\n", 4);
+}
