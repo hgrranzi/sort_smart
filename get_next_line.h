@@ -6,7 +6,7 @@
 /*   By: uteena <uteena@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:59:52 by uteena            #+#    #+#             */
-/*   Updated: 2020/11/30 10:18:46 by uteena           ###   ########.fr       */
+/*   Updated: 2021/04/12 14:28:53 by uteena           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
+
+# define BUFFER_SIZE 4
 
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(char const *str);
