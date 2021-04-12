@@ -11,7 +11,7 @@
 # include <string.h>
 # include "get_next_line.h"
 
-# define OPERATIONS 11
+# define CMD_NUMBER 11
 # define NOT_CMD 0
 # define SA 1
 # define SB 2
@@ -33,9 +33,12 @@ typedef struct	s_stack
 }				t_stack;
 
 void	checker(t_stack *a, t_stack *b);
+int		check_cmd(char *line);
+void	exec_cmd(t_stack *a, t_stack *b, int command);
 
 void	display_error();
 int		is_duplicate(int nbr, t_stack *stack);
+int		is_sorted(t_stack *stack);
 
 int		*init_stack(t_stack *stack, int size);
 int		is_empty(t_stack *stack);

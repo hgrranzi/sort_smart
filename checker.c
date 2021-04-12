@@ -72,16 +72,84 @@ int			check_cmd(char *line)
 	return (0);
 }
 
+void		swap_a(t_stack *a, t_stack *b)
+{
+	write(1, "sa ok\n", 6);
+}
+
+void		swap_b(t_stack *a, t_stack *b)
+{
+	write(1, "sb ok\n", 6);
+}
+
+void		sa_sb(t_stack *a, t_stack *b)
+{
+	write(1, "ss ok\n", 6);
+}
+
+void		push_a(t_stack *a, t_stack *b)
+{
+	write(1, "pa ok\n", 6);
+}
+
+void		push_b(t_stack *a, t_stack *b)
+{
+	write(1, "pb ok\n", 6);
+}
+
+void		rotate_a(t_stack *a, t_stack *b)
+{
+	write(1, "ra ok\n", 6);
+}
+
+void		rotate_b(t_stack *a, t_stack *b)
+{
+	write(1, "rb ok\n", 6);
+}
+
+void		ra_rb(t_stack *a, t_stack *b)
+{
+	write(1, "rr ok\n", 6);
+}
+
+void		reverse_rotate_a(t_stack *a, t_stack *b)
+{
+	write(1, "rra ok\n", 7);
+}
+
+void		reverse_rotate_b(t_stack *a, t_stack *b)
+{
+	write(1, "rrb ok\n", 7);
+}
+
+void		rra_rrb(t_stack *a, t_stack *b)
+{
+	write(1, "rrr ok\n", 7);
+}
+
 void		checker(t_stack *a, t_stack *b)
 {
 	int		readed;
 	char	*line;
 	int		cmd;
+	void	(*exec[CMD_NUMBER + 1])(t_stack *, t_stack *);
 
+	exec[NOT_CMD] = &display_error;
+	exec[SA] = &swap_a;
+	exec[SB] = &swap_b;
+	exec[SS] = &sa_sb;
+	exec[PA] = &push_a;
+	exec[PB] = &push_b;
+	exec[RA] = &rotate_a;
+	exec[RB] = &rotate_b;
+	exec[RR] = &ra_rb;
+	exec[RRA] = &reverse_rotate_a;
+	exec[RRB] = &reverse_rotate_b;
+	exec[RRR] = &rra_rrb;
 	while (get_next_line(0, &line))
 	{
 		cmd = check_cmd(line);
-		exec_cmd(a, b, cmd);
+		exec[cmd](a, b);
 	}
 	if (is_empty(b) && is_sorted(a))
 		write(1, "OK\n", 3);
