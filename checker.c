@@ -28,7 +28,16 @@ int			is_duplicate(int nbr, t_stack *stack)
 
 int			is_sorted(t_stack *stack)
 {
-	return (0);
+	int		i;
+
+	i = 1;
+	while (i < stack->status)
+	{
+		if (stack->data[i] < stack->data[i - 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 void		exec_cmd(t_stack *a, t_stack *b, int command)
