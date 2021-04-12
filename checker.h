@@ -33,8 +33,12 @@ typedef struct	s_stack
 }				t_stack;
 
 void	checker(t_stack *a, t_stack *b);
-int		check_cmd(char *line);
-void	exec_cmd(t_stack *a, t_stack *b, int command);
+void	exec_cmd(char *line, t_stack *a, t_stack *b);
+
+void	swap_top(t_stack *stack);
+void	push_top(t_stack *a, t_stack *b);
+void	rotate_stack(t_stack *stack);
+void	reverse_rotate_stack(t_stack *stack);
 
 void	display_error();
 int		is_duplicate(int nbr, t_stack *stack);

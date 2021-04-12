@@ -40,134 +40,104 @@ int			is_sorted(t_stack *stack)
 	return (1);
 }
 
-void		exec_cmd(t_stack *a, t_stack *b, int command)
-{
-	return ;
-}
-
-int			check_cmd(char *line)
+void		exec_cmd(char *line, t_stack *a, t_stack *b)
 {
 	if (strcmp(line, "sa") == 0)
-		return (SA);
-	if (strcmp(line, "sb") == 0)
-		return (SB);
-	if (strcmp(line, "ss") == 0)
-		return (SS);
-	if (strcmp(line, "pa") == 0)
-		return (PA);
-	if (strcmp(line, "pb") == 0)
-		return (PB);
-	if (strcmp(line, "ra") == 0)
-		return (RA);
-	if (strcmp(line, "rb") == 0)
-		return (RB);
-	if (strcmp(line, "rr") == 0)
-		return (RR);
-	if (strcmp(line, "rra") == 0)
-		return (RRA);
-	if (strcmp(line, "rrb") == 0)
-		return (RRB);
-	if (strcmp(line, "rrr") == 0)
-		return (RRR);
-	return (0);
+		swap_top(a);
+	else if (strcmp(line, "sb") == 0)
+		swap_top(b);
+	else if (strcmp(line, "ss") == 0)
+	{
+		swap_top(a);
+		swap_top(b);
+	}
+	else if (strcmp(line, "pa") == 0)
+		push_top(a, b);
+	else if (strcmp(line, "pb") == 0)
+		push_top(b, a);
+	else if (strcmp(line, "ra") == 0)
+		rotate_stack(a);
+	else if (strcmp(line, "rb") == 0)
+		rotate_stack(b);
+	else if (strcmp(line, "rr") == 0)
+	{
+		rotate_stack(a);
+		rotate_stack(b);
+	}
+	else if (strcmp(line, "rra") == 0)
+		reverse_rotate_stack(a);
+	else if (strcmp(line, "rrb") == 0)
+		reverse_rotate_stack(b);
+	else if (strcmp(line, "rrr") == 0)
+	{
+		reverse_rotate_stack(a);
+		reverse_rotate_stack(b);
+	}
+	else
+		display_error();
 }
 
-void		swap_a(t_stack *a, t_stack *b)
+void		swap_top(t_stack *stack)
 {
 	int		tmp;
 
-	if (a->status > 1)
+	if (stack->status > 1)
 	{
-		tmp = a->data[a->status - 1];
-		a->data[a->status - 1] = a->data[a->status - 2];
-		a->data[a->status - 2] = tmp;
+		tmp = stack->data[stack->status - 1];
+		stack->data[stack->status - 1] = stack->data[stack->status - 2];
+		stack->data[stack->status - 2] = tmp;
 	}
 }
 
-void		swap_b(t_stack *a, t_stack *b)
-{
-	int		tmp;
-
-	if (b->status > 1)
-	{
-		tmp = b->data[b->status - 1];
-		b->data[b->status - 1] = b->data[b->status - 2];
-		b->data[b->status - 2] = tmp;
-	}
-}
-
-void		sa_sb(t_stack *a, t_stack *b)
-{
-	swap_a(a, b);
-	swap_b(a, b);
-}
-
-void		push_a(t_stack *a, t_stack *b)
+void		push_top(t_stack *a, t_stack *b)
 {
 	if (b->status > 0)
 		push(a, (pop(b)));
 }
 
-void		push_b(t_stack *a, t_stack *b)
+void		rotate_stack(t_stack *stack)
 {
-	if (a->status > 0)
-		push(b, (pop(a)));
+	int		i;
+	int		tmp;
+
+	if (stack->status > 1)
+	{
+		i = stack->status - 1;
+		tmp = stack->data[i];
+		while (i > 0)
+		{
+			stack->data[i] = stack->data[i - 1];
+			i--;
+		}
+		stack->data[i] = tmp;
+	}
 }
 
-void		rotate_a(t_stack *a, t_stack *b)
+void		reverse_rotate_stack(t_stack *stack)
 {
-	write(1, "ra ok\n", 6);
-}
+	int		i;
+	int		tmp;
 
-void		rotate_b(t_stack *a, t_stack *b)
-{
-	write(1, "rb ok\n", 6);
-}
-
-void		ra_rb(t_stack *a, t_stack *b)
-{
-	write(1, "rr ok\n", 6);
-}
-
-void		reverse_rotate_a(t_stack *a, t_stack *b)
-{
-	write(1, "rra ok\n", 7);
-}
-
-void		reverse_rotate_b(t_stack *a, t_stack *b)
-{
-	write(1, "rrb ok\n", 7);
-}
-
-void		rra_rrb(t_stack *a, t_stack *b)
-{
-	write(1, "rrr ok\n", 7);
+	if (stack->status > 1)
+	{
+		i = 0;
+		tmp = stack->data[i];
+		while (i < stack->status - 1)
+		{
+			stack->data[i] = stack->data[i + 1];
+			i++;
+		}
+		stack->data[i] = tmp;
+	}
 }
 
 void		checker(t_stack *a, t_stack *b)
 {
 	int		readed;
 	char	*line;
-	int		cmd;
-	void	(*exec[CMD_NUMBER + 1])(t_stack *, t_stack *);
 
-	exec[NOT_CMD] = &display_error;
-	exec[SA] = &swap_a;
-	exec[SB] = &swap_b;
-	exec[SS] = &sa_sb;
-	exec[PA] = &push_a;
-	exec[PB] = &push_b;
-	exec[RA] = &rotate_a;
-	exec[RB] = &rotate_b;
-	exec[RR] = &ra_rb;
-	exec[RRA] = &reverse_rotate_a;
-	exec[RRB] = &reverse_rotate_b;
-	exec[RRR] = &rra_rrb;
 	while (get_next_line(0, &line))
-	{
-		cmd = check_cmd(line);
-		exec[cmd](a, b);
-	}
+		exec_cmd(line, a, b);
 	if (is_empty(b) && is_sorted(a))
 		write(1, "OK\n", 3);
 	else
