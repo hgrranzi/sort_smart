@@ -26,9 +26,36 @@ int			is_duplicate(int nbr, t_stack *stack)
 	return (0);
 }
 
-void		checker(t_stack *a, t_stack *b)
+int			is_sorted(t_stack *stack)
+{
+	return (0);
+}
+
+void		exec_operation(t_stack *a, t_stack *b, int name)
 {
 	return ;
+}
+
+int			check_operation(char *line)
+{
+	return (0);
+}
+
+void		checker(t_stack *a, t_stack *b)
+{
+	int		readed;
+	char	*line;
+	int		name;
+
+	while (get_next_line(0, &line))
+	{
+		name = check_operation(line);
+		exec_operation(a, b, name);
+	}
+	if (is_empty(b) && is_sorted(a))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }
 
 int			main(int argc, char **argv)
