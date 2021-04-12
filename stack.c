@@ -51,15 +51,15 @@ void	print_stack(t_stack *stack) // probably will be better with my own printf
 {
 	int	i;
 
-	i = 0;
+	i = stack->status - 1;
 	write(1, "---\n", 4);
-	while (i < stack->status)
+	while (i >= 0)
 	{
 		aka_putchar('|');
 		aka_putnbr(stack->data[i]);
 		aka_putchar('|');
 		aka_putchar('\n');
-		i++;
+		i--;
 	}
 	write(1, "---\n", 4);
 }

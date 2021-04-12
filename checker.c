@@ -30,12 +30,12 @@ int			is_sorted(t_stack *stack)
 {
 	int		i;
 
-	i = 1;
-	while (i < stack->status)
+	i = stack->status - 1;
+	while (i > 0)
 	{
-		if (stack->data[i] < stack->data[i - 1])
+		if (stack->data[i] > stack->data[i - 1])
 			return (0);
-		i++;
+		i--;
 	}
 	return (1);
 }
@@ -96,18 +96,18 @@ int			main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 
-	i = 1;
+	i = argc - 1;
 	if (argc > 1)
 	{
 		if (!(init_stack(&a, argc - 1)) || (!init_stack(&b, argc - 1)))
 			display_error();
-		while (i < argc)
+		while (i > 0)
 		{
 			nbr = aka_atoi(argv[i]);
 			if (is_duplicate(nbr, &a))
 				display_error();
 			push(&a, nbr);
-			i++;
+			i--;
 		}
 		checker(&a, &b);
 		print_stack(&a);
