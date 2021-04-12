@@ -7,9 +7,23 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
+# include <string.h>
+# include "get_next_line.h"
+
+# define OPERATIONS 11
+# define NOT_CMD 0
+# define SA 1
+# define SB 2
+# define SS 3
+# define PA 4
+# define PB 5
+# define RA 6
+# define RB 7
+# define RR 8
+# define RRA 9
+# define RRB 10
+# define RRR 11
 
 typedef struct	s_stack
 {

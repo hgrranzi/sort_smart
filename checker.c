@@ -31,13 +31,35 @@ int			is_sorted(t_stack *stack)
 	return (0);
 }
 
-void		exec_operation(t_stack *a, t_stack *b, int name)
+void		exec_cmd(t_stack *a, t_stack *b, int command)
 {
 	return ;
 }
 
-int			check_operation(char *line)
+int			check_cmd(char *line)
 {
+	if (strcmp(line, "sa") == 0)
+		return (SA);
+	if (strcmp(line, "sb") == 0)
+		return (SB);
+	if (strcmp(line, "ss") == 0)
+		return (SS);
+	if (strcmp(line, "pa") == 0)
+		return (PA);
+	if (strcmp(line, "pb") == 0)
+		return (PB);
+	if (strcmp(line, "ra") == 0)
+		return (RA);
+	if (strcmp(line, "rb") == 0)
+		return (RB);
+	if (strcmp(line, "rr") == 0)
+		return (RR);
+	if (strcmp(line, "rra") == 0)
+		return (RRA);
+	if (strcmp(line, "rrb") == 0)
+		return (RRB);
+	if (strcmp(line, "rrr") == 0)
+		return (RRR);
 	return (0);
 }
 
@@ -45,12 +67,12 @@ void		checker(t_stack *a, t_stack *b)
 {
 	int		readed;
 	char	*line;
-	int		name;
+	int		cmd;
 
 	while (get_next_line(0, &line))
 	{
-		name = check_operation(line);
-		exec_operation(a, b, name);
+		cmd = check_cmd(line);
+		exec_cmd(a, b, cmd);
 	}
 	if (is_empty(b) && is_sorted(a))
 		write(1, "OK\n", 3);
