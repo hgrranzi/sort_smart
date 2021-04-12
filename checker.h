@@ -18,8 +18,10 @@ typedef struct	s_stack
 	int			size;
 }				t_stack;
 
-void	display_error();
 void	checker(t_stack *a, t_stack *b);
+
+void	display_error();
+int		is_duplicate(int nbr, t_stack *stack);
 
 int		*init_stack(t_stack *stack, int size);
 int		is_empty(t_stack *stack);

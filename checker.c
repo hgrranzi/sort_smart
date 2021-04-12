@@ -12,6 +12,20 @@ void		display_error()
 	exit(0);
 }
 
+int			is_duplicate(int nbr, t_stack *stack)
+{
+	int		i;
+
+	i = 0;
+	while (i < stack->status)
+	{
+		if (stack->data[i] == nbr)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void		checker(t_stack *a, t_stack *b)
 {
 	return ;
@@ -20,6 +34,7 @@ void		checker(t_stack *a, t_stack *b)
 int			main(int argc, char **argv)
 {
 	int		i;
+	int		nbr;
 	t_stack	a;
 	t_stack	b;
 
@@ -30,7 +45,10 @@ int			main(int argc, char **argv)
 			display_error();
 		while (i < argc)
 		{
-			push(&a, aka_atoi(argv[i]));
+			nbr = aka_atoi(argv[i]);
+			if (is_duplicate(nbr, &a))
+				display_error();
+			push(&a, nbr);
 			i++;
 		}
 		checker(&a, &b);
