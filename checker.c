@@ -74,27 +74,44 @@ int			check_cmd(char *line)
 
 void		swap_a(t_stack *a, t_stack *b)
 {
-	write(1, "sa ok\n", 6);
+	int		tmp;
+
+	if (a->status > 1)
+	{
+		tmp = a->data[a->status - 1];
+		a->data[a->status - 1] = a->data[a->status - 2];
+		a->data[a->status - 2] = tmp;
+	}
 }
 
 void		swap_b(t_stack *a, t_stack *b)
 {
-	write(1, "sb ok\n", 6);
+	int		tmp;
+
+	if (b->status > 1)
+	{
+		tmp = b->data[b->status - 1];
+		b->data[b->status - 1] = b->data[b->status - 2];
+		b->data[b->status - 2] = tmp;
+	}
 }
 
 void		sa_sb(t_stack *a, t_stack *b)
 {
-	write(1, "ss ok\n", 6);
+	swap_a(a, b);
+	swap_b(a, b);
 }
 
 void		push_a(t_stack *a, t_stack *b)
 {
-	write(1, "pa ok\n", 6);
+	if (b->status > 0)
+		push(a, (pop(b)));
 }
 
 void		push_b(t_stack *a, t_stack *b)
 {
-	write(1, "pb ok\n", 6);
+	if (a->status > 0)
+		push(b, (pop(a)));
 }
 
 void		rotate_a(t_stack *a, t_stack *b)
