@@ -59,6 +59,22 @@ void	aka_putnbr(int nbr)
 	}
 }
 
+void	create_stacks(char **argv, int i, t_stack *a, t_stack *b)
+{
+	int	nbr;
+
+	if (!(init_stack(a, i - 1)) || (!init_stack(b, i - 1)))
+			display_error();
+		while (i > 0)
+		{
+			nbr = aka_atoi(argv[i]);
+			if (is_duplicate(nbr, a))
+				display_error();
+			push(a, nbr);
+			i--;
+		}
+}
+
 void	print_stack(t_stack *stack) // probably will be better with my own printf
 {
 	int	i;
@@ -74,4 +90,10 @@ void	print_stack(t_stack *stack) // probably will be better with my own printf
 		i--;
 	}
 	write(1, "---\n", 4);
+}
+
+void		display_error()
+{
+	write(1, "Error\n", 6);
+	exit(0);
 }

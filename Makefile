@@ -1,26 +1,36 @@
 NAME = checker
 
+NAME_TWO = sort_smart
+
 COMPILE = gcc -c
 
 LINK = gcc -Wall -Wextra -Werror
 
-SRCS = checker.c checker_cmd.c checker_utils.c stack.c \
+SRCS = checker.c checker_cmd.c utils.c stack.c \
+	get_next_line.c get_next_line_utils.c
+
+SRCS_TWO = sort_smart.c utils.c stack.c \
 	get_next_line.c get_next_line_utils.c
 
 OBJS =	$(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): get_next_line.h stack.h checker.h $(OBJS)
+$(NAME): get_next_line.h stack.h utils.h checker.h $(OBJS)
 	$(LINK) $(OBJS) -o $(NAME)
 
-%.o: %.c get_next_line.h stack.h checker.h
+$(NAME_TWO): get_next_line.h stack.h utils.h sort_smart.h $(SRCS_TWO)
+	$(LINK) $(SRCS_TWO) -o $(NAME_TWO)
+
+%.o: %.c get_next_line.h stack.h utils.h checker.h sort_smart.h
 	$(COMPILE) $< -o $@
 
+sort: $(NAME_TWO)
+
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_TWO)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_TWO)
 
 re: fclean all
