@@ -58,3 +58,20 @@ void	aka_putnbr(int nbr)
 		aka_putchar(nbr % 10 + 48);
 	}
 }
+
+void	print_stack(t_stack *stack) // probably will be better with my own printf
+{
+	int	i;
+
+	i = stack->status - 1;
+	write(1, "---\n", 4);
+	while (i >= 0)
+	{
+		aka_putchar('|');
+		aka_putnbr(stack->data[i]);
+		aka_putchar('|');
+		aka_putchar('\n');
+		i--;
+	}
+	write(1, "---\n", 4);
+}

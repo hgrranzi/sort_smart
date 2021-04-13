@@ -4,7 +4,7 @@
 /*                                                 */
 /* *********************************************** */
 
-#include "checker.h"
+#include "stack.h"
 
 int		*init_stack(t_stack *stack, int size)
 {
@@ -22,6 +22,34 @@ int		is_empty(t_stack *stack)
 int		is_full(t_stack *stack)
 {
 	return (stack->status == stack->size);
+}
+
+int			is_duplicate(int nbr, t_stack *stack)
+{
+	int		i;
+
+	i = 0;
+	while (i < stack->status)
+	{
+		if (stack->data[i] == nbr)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int			is_sorted(t_stack *stack)
+{
+	int		i;
+
+	i = stack->status - 1;
+	while (i > 0)
+	{
+		if (stack->data[i] > stack->data[i - 1])
+			return (0);
+		i--;
+	}
+	return (1);
 }
 
 void	push(t_stack *stack, int element)
@@ -45,21 +73,4 @@ void	destroy_stack(t_stack *stack)
 	stack->data = NULL;
 	stack->status = 0;
 	stack->size = 0;
-}
-
-void	print_stack(t_stack *stack) // probably will be better with my own printf
-{
-	int	i;
-
-	i = stack->status - 1;
-	write(1, "---\n", 4);
-	while (i >= 0)
-	{
-		aka_putchar('|');
-		aka_putnbr(stack->data[i]);
-		aka_putchar('|');
-		aka_putchar('\n');
-		i--;
-	}
-	write(1, "---\n", 4);
 }

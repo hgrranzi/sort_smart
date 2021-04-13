@@ -10,6 +10,7 @@
 # include <stdio.h>
 # include <string.h>
 # include "get_next_line.h"
+# include "stack.h"
 
 # define CMD_NUMBER 11
 # define NOT_CMD 0
@@ -25,13 +26,6 @@
 # define RRB 10
 # define RRR 11
 
-typedef struct	s_stack
-{
-	int			*data;
-	int			status;
-	int			size;
-}				t_stack;
-
 void	checker(t_stack *a, t_stack *b);
 void	exec_cmd(char *line, t_stack *a, t_stack *b);
 
@@ -41,20 +35,11 @@ void	rotate_stack(t_stack *stack);
 void	reverse_rotate_stack(t_stack *stack);
 
 void	display_error();
-int		is_duplicate(int nbr, t_stack *stack);
-int		is_sorted(t_stack *stack);
-
-int		*init_stack(t_stack *stack, int size);
-int		is_empty(t_stack *stack);
-int		is_full(t_stack *stack);
-void	push(t_stack *stack, int element);
-int		pop(t_stack *stack);
-void	destroy_stack(t_stack *stack);
-void	print_stack(t_stack *stack);
 
 int		aka_atoi(char *str);
 int		aka_isdigit(char c);
 void	aka_putchar(char c);
 void	aka_putnbr(int nbr);
+void	print_stack(t_stack *stack);
 
 #endif
