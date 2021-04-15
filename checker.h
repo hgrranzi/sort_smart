@@ -9,6 +9,7 @@
 
 # include <stdio.h>
 # include <string.h>
+# include "mlx/mlx.h"
 # include "get_next_line.h"
 # include "utils.h"
 
@@ -25,9 +26,36 @@
 # define RRA 9
 # define RRB 10
 # define RRR 11
+# define SPEED_DELAY 1000
+# define WIN_W 1920
+# define WIN_H 1080
+
+typedef struct		s_image
+{
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line;
+	int				endian;
+	int				w;
+	int				h;
+}					t_image;
+
+typedef struct	s_data
+{
+	void		*mlx_p;
+	void		*win_p;
+	t_image		*visual;
+
+}				t_data;
+
 
 void	checker(t_stack *a, t_stack *b);
 void	exec_cmd(char *line, t_stack *a, t_stack *b);
+
+void	get_visual(t_data *data);
+void	fill_background(t_data *data);
+void	run_visual(t_data *data, t_stack *a, t_stack *b);
 
 void	swap_top(t_stack *stack);
 void	push_top(t_stack *a, t_stack *b);

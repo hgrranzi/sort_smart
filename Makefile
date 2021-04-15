@@ -8,7 +8,7 @@ LINK = gcc -Wall -Wextra -Werror
 
 MLX = -I mlx -L mlx -lmlx -framework OpenGL -framework AppKit
 
-SRCS = checker.c checker_cmd.c utils.c stack.c \
+SRCS = checker.c checker_cmd.c utils.c stack.c visual.c\
 	get_next_line.c get_next_line_utils.c
 
 SRCS_TWO = sort_smart.c sort_stupid.c utils.c checker_cmd.c stack.c \
