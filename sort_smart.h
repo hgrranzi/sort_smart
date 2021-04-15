@@ -8,6 +8,7 @@
 # define SORT_SMART_H
 
 # include "checker.h"
+# include "mlx/mlx.h"
 
 void	sort_stupid(t_stack *a, t_stack *b);
 int		find_min(t_stack *stack);
