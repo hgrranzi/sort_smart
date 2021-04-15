@@ -19,11 +19,11 @@ OBJS =	$(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): get_next_line.h stack.h utils.h checker.h $(OBJS)
-	$(LINK) $(OBJS) -o $(NAME)
+	cd mlx && make
+	$(LINK) $(MLX) $(OBJS) mlx/libmlx.a -o $(NAME)
 
 $(NAME_TWO): get_next_line.h stack.h utils.h sort_smart.h $(SRCS_TWO)
-	cd mlx && make
-	$(LINK) $(MLX) $(SRCS_TWO) mlx/libmlx.a -o $(NAME_TWO)
+	$(LINK) $(SRCS_TWO) -o $(NAME_TWO)
 
 %.o: %.c get_next_line.h stack.h utils.h checker.h sort_smart.h
 	$(COMPILE) $< -o $@
