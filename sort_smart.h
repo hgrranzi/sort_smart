@@ -7,9 +7,9 @@
 #ifndef SORT_SMART_H
 # define SORT_SMART_H
 
-# include "get_next_line.h"
-# include "utils.h"
+# include "checker.h"
 
-
+void	sort_stupid(t_stack *a, t_stack *b);
+int		find_min(t_stack *stack);
 
 #endif

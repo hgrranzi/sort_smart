@@ -9,7 +9,7 @@ LINK = gcc -Wall -Wextra -Werror
 SRCS = checker.c checker_cmd.c utils.c stack.c \
 	get_next_line.c get_next_line_utils.c
 
-SRCS_TWO = sort_smart.c utils.c stack.c \
+SRCS_TWO = sort_smart.c sort_stupid.c utils.c checker_cmd.c stack.c \
 	get_next_line.c get_next_line_utils.c
 
 OBJS =	$(SRCS:.c=.o)

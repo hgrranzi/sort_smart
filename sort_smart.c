@@ -14,8 +14,7 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 	{
 		create_stacks(argv, argc - 1, &a, &b);
-		print_stack(&a);
-		print_stack(&b);
+		sort_stupid(&a, &b);
 	}
 	return (0);
 }
