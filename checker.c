@@ -8,25 +8,18 @@
 
 void		checker(t_stack *a, t_stack *b)
 {
-	int		readed;
-	char	*line;
 	t_data	data;
 	t_image	visual;
+	char	*line;
 
 	data.visual = &visual;
+	data.a = a;
+	data.b = b;
 	if (!(data.mlx_p = mlx_init()) || (!(data.win_p = mlx_new_window(data.mlx_p, WIN_W, WIN_H, "checker"))))
 		display_error();
 	get_visual(&data);
-	run_visual(&data, a, b);
-	while (get_next_line(0, &line))
-	{
-		exec_cmd(line, a, b);
-		free(line);
-	}
-	if (is_empty(b) && is_sorted(a))
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	mlx_hook(data.win_p, 17, 0, run_visual, 0);
+	mlx_loop_hook(data.mlx_p, run_visual, &data);
 	mlx_loop(data.mlx_p);
 }
 

@@ -6,9 +6,9 @@
 
 #include "checker.h"
 
-void				put_pxl(t_data *data, int x, int y, int color)
+void		put_pxl(t_data *data, int x, int y, int color)
 {
-	char			*dst;
+	char	*dst;
 
 	if (x >= 0 && y >= 0)
 	{
@@ -18,10 +18,10 @@ void				put_pxl(t_data *data, int x, int y, int color)
 	}
 }
 
-void	fill_background(t_data *data)
+void		fill_background(t_data *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	x = 0;
 	while (x < WIN_W)
@@ -36,28 +36,51 @@ void	fill_background(t_data *data)
 	}
 }
 
-void	run_visual(t_data *data, t_stack *a, t_stack *b)
+void		draw_stack(t_data *data, t_stack *stack)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
-	fill_background(data);
 	x = 0;
-	while (x < a->status - 1)
+	while (x < stack->status - 1)
 	{
 		y = 0;
-		while (y < a->data[x])
+		while (y < stack->data[x])
 		{
 			put_pxl(data, x, y, 0xf0f8ff);
 			y++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(data->mlx_p, data->win_p, data->visual->img, 0, 0);
-	return ;
 }
 
-void	get_visual(t_data *data)
+int			run_visual(t_data *data)
+{
+	char	*line;
+
+	line = NULL;
+	fill_background(data);
+	if (get_next_line(0, &line))
+	{
+		exec_cmd(line, data->a, data->b);
+		usleep(SPEED_DELAY);
+		free(line);
+		line = NULL;
+		draw_stack(data, data->a);
+		mlx_put_image_to_window(data->mlx_p, data->win_p, data->visual->img, 0, 0);
+	}
+	else
+	{
+		if (is_empty(data->b) && is_sorted(data->a))
+			write(1, "OK\n", 3);
+		else
+			write(1, "KO\n", 3);
+		exit(0);
+	}
+	return (0);
+}
+
+void		get_visual(t_data *data)
 {
 	data->visual->img = mlx_new_image(data->mlx_p, WIN_W, WIN_H);
 	if (data->visual->img == NULL)

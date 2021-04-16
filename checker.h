@@ -26,7 +26,7 @@
 # define RRA 9
 # define RRB 10
 # define RRR 11
-# define SPEED_DELAY 1000
+# define SPEED_DELAY 500
 # define WIN_W 1920
 # define WIN_H 1080
 
@@ -43,6 +43,8 @@ typedef struct		s_image
 
 typedef struct	s_data
 {
+	t_stack		*a;
+	t_stack		*b;
 	void		*mlx_p;
 	void		*win_p;
 	t_image		*visual;
@@ -55,7 +57,7 @@ void	exec_cmd(char *line, t_stack *a, t_stack *b);
 
 void	get_visual(t_data *data);
 void	fill_background(t_data *data);
-void	run_visual(t_data *data, t_stack *a, t_stack *b);
+int		run_visual(t_data *data);
 
 void	swap_top(t_stack *stack);
 void	push_top(t_stack *a, t_stack *b);
