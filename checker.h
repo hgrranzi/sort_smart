@@ -26,9 +26,9 @@
 # define RRA 9
 # define RRB 10
 # define RRR 11
-# define SPEED_DELAY 500
-# define WIN_W 1920
-# define WIN_H 1080
+# define SPEED_DELAY 10
+# define WIN_W 1280
+# define IMG_PATH "pic/red_space.xpm"
 
 typedef struct		s_image
 {
@@ -45,8 +45,11 @@ typedef struct	s_data
 {
 	t_stack		*a;
 	t_stack		*b;
+	int			stripe_w;
+	float		stripe_h;
 	void		*mlx_p;
 	void		*win_p;
+	t_image		*back;
 	t_image		*visual;
 
 }				t_data;
