@@ -6,38 +6,21 @@
 
 #include "checker.h"
 
-int		find_max(t_stack *stack)
-{
-	int	i;
-	int	current_max;
-
-	i = stack->status - 1;
-	current_max = INT32_MIN;
-	while (i >= 0)
-	{
-		if (stack->data[i] > current_max)
-			current_max = stack->data[i];
-		i--;
-	}
-	return (current_max);
-}
-
 void		checker(t_stack *a, t_stack *b)
 {
 	t_data	data;
 	t_image	visual;
 	t_image	back;
 
-	data.visual = &visual;
-	data.back = &back;
-	data.stripe_w = (1.0 * WIN_W - 2 * PADDING) / a->status;
-	data.stripe_h = ((1.0 * WIN_W - 2 * PADDING) / find_max(a)) / 2;
 	data.a = a;
 	data.b = b;
+	data.visual = &visual;
+	data.back = &back;
 	if (!(data.mlx_p = mlx_init()) || (!(data.win_p = mlx_new_window(data.mlx_p, WIN_W, WIN_W, "checker"))))
 		display_error();
 	get_visual(&data);
 	mlx_hook(data.win_p, 17, 0, run_visual, 0);
+	mlx_hook(data.win_p, 2, 1L << 0, press_key, &data);
 	mlx_loop_hook(data.mlx_p, run_visual, &data);
 	mlx_loop(data.mlx_p);
 }

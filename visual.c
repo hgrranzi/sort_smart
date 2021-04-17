@@ -6,6 +6,38 @@
 
 #include "checker.h"
 
+int		press_key(int key, t_data *data)
+{
+	printf("%d\n", key);
+	if (key == 35)
+		data->play = 0;
+	else if (key == 49)
+		data->play = 1;
+	if (key == 125)
+		data->speed_delay = 1;
+	else if (key == 126)
+		data->speed_delay = 0;
+	if (key == 53)
+		exit(0);
+	return (0);
+}
+
+int		find_max(t_stack *stack)
+{
+	int	i;
+	int	current_max;
+
+	i = stack->status - 1;
+	current_max = INT32_MIN;
+	while (i >= 0)
+	{
+		if (stack->data[i] > current_max)
+			current_max = stack->data[i];
+		i--;
+	}
+	return (current_max);
+}
+
 void		put_pxl(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -98,7 +130,7 @@ int			run_visual(t_data *data)
 
 	line = NULL;
 	fill_background(data);
-	if (get_next_line(0, &line))
+	if (data->play && get_next_line(0, &line))
 	{
 		exec_cmd(line, data->a, data->b);
 		free(line);
@@ -113,6 +145,8 @@ int			run_visual(t_data *data)
 		else
 			write(1, "KO\n", 3);
 	}
+	if (data->speed_delay)
+		usleep(SPEED_DELAY);
 	return (0);
 }
 
@@ -128,5 +162,8 @@ void		get_visual(t_data *data)
 		display_error();
 	data->back->addr = mlx_get_data_addr(data->back->img,
 		&data->back->bpp, &data->back->line, &data->back->endian);
+	data->stripe_w = (1.0 * WIN_W - 2 * PADDING) / data->a->status;
+	data->stripe_h = ((1.0 * WIN_W - 2 * PADDING) / find_max(data->a)) / 2;
+	data->speed_delay = 0;
 	return ;
 }
