@@ -8,10 +8,11 @@
 
 int		press_key(int key, t_data *data)
 {
-	printf("%d\n", key);
 	if (key == 35)
-		data->play = 0;
-	else if (key == 49)
+		data->pause = 1;
+	if (key == 49)
+		data->pause = 0;
+	if (key == 124 || key == 49)
 		data->play = 1;
 	if (key == 125)
 		data->speed_delay = 1;
@@ -137,13 +138,13 @@ int			run_visual(t_data *data)
 		line = NULL;
 		draw_stack(data);
 		mlx_put_image_to_window(data->mlx_p, data->win_p, data->visual->img, 0, 0);
+		if (data->pause)
+			data->play = 0;
 	}
 	else
 	{
 		if (is_empty(data->b) && is_sorted(data->a))
 			write(1, "OK\n", 3);
-		else
-			write(1, "KO\n", 3);
 	}
 	if (data->speed_delay)
 		usleep(SPEED_DELAY);
@@ -152,6 +153,9 @@ int			run_visual(t_data *data)
 
 void		get_visual(t_data *data)
 {
+	int		i;
+
+	i = 0;
 	data->visual->img = mlx_new_image(data->mlx_p, WIN_W, WIN_W);
 	if (data->visual->img == NULL)
 		display_error();
@@ -165,5 +169,7 @@ void		get_visual(t_data *data)
 	data->stripe_w = (1.0 * WIN_W - 2 * PADDING) / data->a->status;
 	data->stripe_h = ((1.0 * WIN_W - 2 * PADDING) / find_max(data->a)) / 2;
 	data->speed_delay = 0;
+	data->play = 1;
+	data->pause = 0;
 	return ;
 }

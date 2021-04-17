@@ -54,6 +54,7 @@ typedef struct	s_data
 	t_image		*back;
 	t_image		*visual;
 	int			play;
+	id_t		pause;
 	int			speed_delay;
 
 }				t_data;
