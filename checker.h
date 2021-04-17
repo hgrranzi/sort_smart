@@ -9,6 +9,7 @@
 
 # include <stdio.h>
 # include <string.h>
+#include <math.h>
 # include "mlx/mlx.h"
 # include "get_next_line.h"
 # include "utils.h"
@@ -28,6 +29,7 @@
 # define RRR 11
 # define SPEED_DELAY 10
 # define WIN_W 1280
+# define PADDING 10
 # define IMG_PATH "pic/red_space.xpm"
 
 typedef struct		s_image
@@ -45,7 +47,7 @@ typedef struct	s_data
 {
 	t_stack		*a;
 	t_stack		*b;
-	int			stripe_w;
+	float		stripe_w;
 	float		stripe_h;
 	void		*mlx_p;
 	void		*win_p;

@@ -30,8 +30,8 @@ void		checker(t_stack *a, t_stack *b)
 
 	data.visual = &visual;
 	data.back = &back;
-	data.stripe_w = WIN_W / a->status;
-	data.stripe_h = 1.0 * find_max(a) / WIN_W * 2;
+	data.stripe_w = (1.0 * WIN_W - 2 * PADDING) / a->status;
+	data.stripe_h = ((1.0 * WIN_W - 2 * PADDING) / find_max(a)) / 2;
 	data.a = a;
 	data.b = b;
 	if (!(data.mlx_p = mlx_init()) || (!(data.win_p = mlx_new_window(data.mlx_p, WIN_W, WIN_W, "checker"))))

@@ -72,18 +72,23 @@ void		draw_stripe(t_data *data, int stripe_h, int start_y, int start_x)
 void		draw_stack(t_data *data)
 {
 	int		i;
+	int		j;
 
-	i = 0;
-	while (i < data->a->status - 1)
+	i = data->b->status - 1 - 1;
+	j = 0;
+	while (i > 0)
 	{
-		draw_stripe(data, (int)(data->stripe_h * data->a->data[i]), WIN_W / 2 - 1, i * data->stripe_w);
-		i++;
+		draw_stripe(data, (int)(data->stripe_h * data->b->data[i]), WIN_W / 2 - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
+		i--;
+		j++;
 	}
-	i = 0;
-	while (i < data->b->status - 1)
+	i = data->a->status - 1 - 1;
+	j = 0;
+	while (i > 0)
 	{
-		draw_stripe(data, (int)(data->stripe_h * data->b->data[i]), WIN_W - 1, i * data->stripe_w);
-		i++;
+		draw_stripe(data, (int)(data->stripe_h * data->a->data[i]), WIN_W - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
+		i--;
+		j++;
 	}
 }
 
