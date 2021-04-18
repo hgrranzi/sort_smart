@@ -70,61 +70,94 @@ void		update_history(t_stack *history, int element)
 	push(history, element);
 }
 
-void		exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history)
+int			line_to_cmd(char *line)
 {
+	int		cmd;
+
 	if (strcmp(line, "sa") == 0)
+		cmd = SA;
+	else if (strcmp(line, "sb") == 0)
+		cmd = SB;
+	else if (strcmp(line, "ss") == 0)
+		cmd = SS;
+	else if (strcmp(line, "pa") == 0)
+		cmd = PA;
+	else if (strcmp(line, "pb") == 0)
+		cmd = PB;
+	else if (strcmp(line, "ra") == 0)
+		cmd = RA;
+	else if (strcmp(line, "rb") == 0)
+		cmd = RB;
+	else if (strcmp(line, "rr") == 0)
+		cmd = RR;
+	else if (strcmp(line, "rra") == 0)
+		cmd = RRA;
+	else if (strcmp(line, "RRB") == 0)
+		cmd = RRB;
+	else if (strcmp(line, "RRR") == 0)
+		cmd = RRR;
+	else
+		cmd = NOT_CMD;
+	free(line);
+	line = NULL;
+	return (cmd);
+}
+
+void		exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history)
+{
+	if (cmd == SA)
 	{
 		swap_top(a);
 		update_history(history, SA);
 	}
-	else if (strcmp(line, "sb") == 0)
+	else if (cmd == SB)
 	{
 		swap_top(b);
 		update_history(history, SB);
 	}
-	else if (strcmp(line, "ss") == 0)
+	else if (cmd == SS)
 	{
 		swap_top(a);
 		swap_top(b);
 		update_history(history, SS);
 	}
-	else if (strcmp(line, "pa") == 0)
+	else if (cmd == PA)
 	{
 		push_top(a, b);
 		update_history(history, PA);
 	}
-	else if (strcmp(line, "pb") == 0)
+	else if (cmd == PB)
 	{
 		push_top(b, a);
 		update_history(history, PB);
 	}
-	else if (strcmp(line, "ra") == 0)
+	else if (cmd == RA)
 	{
 		rotate_stack(a);
 		update_history(history, RA);
 	}
-	else if (strcmp(line, "rb") == 0)
+	else if (cmd == RB)
 	{
 		rotate_stack(b);
 		update_history(history, RB);
 	}
-	else if (strcmp(line, "rr") == 0)
+	else if (cmd == RR)
 	{
 		rotate_stack(a);
 		rotate_stack(b);
 		update_history(history, RR);
 	}
-	else if (strcmp(line, "rra") == 0)
+	else if (cmd == RRA)
 	{
 		reverse_rotate_stack(a);
 		update_history(history, RRA);
 	}
-	else if (strcmp(line, "rrb") == 0)
+	else if (cmd == RRB)
 	{
 		reverse_rotate_stack(b);
 		update_history(history, RRB);
 	}
-	else if (strcmp(line, "rrr") == 0)
+	else if (cmd == RRR)
 	{
 		reverse_rotate_stack(a);
 		reverse_rotate_stack(b);
@@ -134,7 +167,7 @@ void		exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history)
 		display_error();
 }
 
-void		exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history)
+void		exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history, t_stack *forward)
 {
 	int		cmd;
 
@@ -172,4 +205,5 @@ void		exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history)
 		rotate_stack(a);
 		rotate_stack(b);
 	}
+	push(forward, cmd);
 }

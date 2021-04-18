@@ -94,6 +94,8 @@ void		draw_stripe(t_data *data, int stripe_h, int start_y, int start_x)
 	y = start_y;
 	x = start_x;
 	i = 0;
+	if (stripe_h < 1)
+		stripe_h = 1;
 	while (i < data->stripe_w / 2)
 	{
 		y = start_y;
@@ -112,17 +114,17 @@ void		draw_stack(t_data *data)
 	int		i;
 	int		j;
 
-	i = data->b->status - 1 - 1;
+	i = data->b->status - 1;
 	j = 0;
-	while (i > 0)
+	while (i >= 0)
 	{
 		draw_stripe(data, (int)(data->stripe_h * data->b->data[i]), WIN_W / 2 - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
 		i--;
 		j++;
 	}
-	i = data->a->status - 1 - 1;
+	i = data->a->status - 1;
 	j = 0;
-	while (i > 0)
+	while (i >= 0)
 	{
 		draw_stripe(data, (int)(data->stripe_h * data->a->data[i]), WIN_W - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
 		i--;
@@ -133,24 +135,22 @@ void		draw_stack(t_data *data)
 int			run_visual(t_data *data)
 {
 	char	*line;
+	int		cmd;
 
 	line = NULL;
+	cmd = 0;
 	fill_background(data);
 	if (data->pause && data->back_history)
-		exec_contre_cmd(data->a, data->b, data->history);
+		exec_contre_cmd(data->a, data->b, data->history, data->forward);
+	else if (data->play && data->forward->status)
+		exec_cmd(pop(data->forward), data->a, data->b, data->history);
 	else if (data->play && get_next_line(0, &line))
 	{
-		exec_cmd(line, data->a, data->b, data->history);
-		free(line);
-		line = NULL;
-		if (data->pause)
-			data->play = 0;
+		cmd = line_to_cmd(line);
+		exec_cmd(cmd, data->a, data->b, data->history);
 	}
-	else
-	{
-		if (is_empty(data->b) && is_sorted(data->a))
-			write(1, "OK\n", 3);
-	}
+	if (data->pause)
+		data->play = 0;
 	data->back_history = 0;
 	draw_stack(data);
 	mlx_put_image_to_window(data->mlx_p, data->win_p, data->visual->img, 0, 0);

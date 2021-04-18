@@ -31,7 +31,7 @@
 # define WIN_W 1280
 # define PADDING 10
 # define IMG_PATH "pic/red_space.xpm"
-# define HISTORY_SIZE 10
+# define HISTORY_SIZE 16
 
 typedef struct		s_image
 {
@@ -49,6 +49,7 @@ typedef struct	s_data
 	t_stack		*a;
 	t_stack		*b;
 	t_stack		*history;
+	t_stack		*forward;
 	float		stripe_w;
 	float		stripe_h;
 	void		*mlx_p;
@@ -64,9 +65,10 @@ typedef struct	s_data
 
 
 void			checker(t_stack *a, t_stack *b);
-void			exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history);
+int				line_to_cmd(char *line);
+void			exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history);
 void			update_history(t_stack *history, int element);
-void			exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history);
+void			exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history, t_stack *forward);
 
 void			get_visual(t_data *data);
 int				find_max(t_stack *stack);
