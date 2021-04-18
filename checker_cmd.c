@@ -133,3 +133,43 @@ void		exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history)
 	else
 		display_error();
 }
+
+void		exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history)
+{
+	int		cmd;
+
+	if (is_empty(history))
+		return ;
+	cmd = pop(history);
+	if (cmd == SA)
+		swap_top(a);
+	else if (cmd == SB)
+		swap_top(b);
+	else if (cmd == SS)
+	{
+		swap_top(a);
+		swap_top(b);
+	}
+	else if (cmd == PA)
+		push_top(b, a);
+	else if (cmd == PB)
+		push_top(a, b);
+	else if (cmd == RA)
+		reverse_rotate_stack(a);
+	else if (cmd == RB)
+		reverse_rotate_stack(b);
+	else if (cmd == RR)
+	{
+		reverse_rotate_stack(a);
+		reverse_rotate_stack(b);
+	}
+	else if (cmd == RRA)
+		rotate_stack(a);
+	else if (cmd == RRB)
+		rotate_stack(b);
+	else if (cmd == RRR)
+	{
+		rotate_stack(a);
+		rotate_stack(b);
+	}
+}

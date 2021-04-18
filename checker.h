@@ -56,7 +56,8 @@ typedef struct	s_data
 	t_image		*back;
 	t_image		*visual;
 	int			play;
-	id_t		pause;
+	int			pause;
+	int			back_history;
 	int			speed_delay;
 
 }				t_data;
@@ -65,6 +66,7 @@ typedef struct	s_data
 void			checker(t_stack *a, t_stack *b);
 void			exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history);
 void			update_history(t_stack *history, int element);
+void			exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history);
 
 void			get_visual(t_data *data);
 int				find_max(t_stack *stack);
