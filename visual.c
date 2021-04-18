@@ -133,7 +133,7 @@ int			run_visual(t_data *data)
 	fill_background(data);
 	if (data->play && get_next_line(0, &line))
 	{
-		exec_cmd(line, data->a, data->b);
+		exec_cmd(line, data->a, data->b, data->history);
 		free(line);
 		line = NULL;
 		draw_stack(data);

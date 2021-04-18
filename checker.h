@@ -63,7 +63,8 @@ typedef struct	s_data
 
 
 void			checker(t_stack *a, t_stack *b);
-void			exec_cmd(char *line, t_stack *a, t_stack *b);
+void			exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history);
+void			update_history(t_stack *history, int element);
 
 void			get_visual(t_data *data);
 int				find_max(t_stack *stack);

@@ -60,38 +60,75 @@ void		reverse_rotate_stack(t_stack *stack)
 	}
 }
 
-void		exec_cmd(char *line, t_stack *a, t_stack *b)
+void		update_history(t_stack *history, int element)
+{
+	if (is_full(history))
+	{
+		reverse_rotate_stack(history);
+		history->status--;
+	}
+	push(history, element);
+}
+
+void		exec_cmd(char *line, t_stack *a, t_stack *b, t_stack *history)
 {
 	if (strcmp(line, "sa") == 0)
+	{
 		swap_top(a);
+		update_history(history, SA);
+	}
 	else if (strcmp(line, "sb") == 0)
+	{
 		swap_top(b);
+		update_history(history, SB);
+	}
 	else if (strcmp(line, "ss") == 0)
 	{
 		swap_top(a);
 		swap_top(b);
+		update_history(history, SS);
 	}
 	else if (strcmp(line, "pa") == 0)
+	{
 		push_top(a, b);
+		update_history(history, PA);
+	}
 	else if (strcmp(line, "pb") == 0)
+	{
 		push_top(b, a);
+		update_history(history, PB);
+	}
 	else if (strcmp(line, "ra") == 0)
+	{
 		rotate_stack(a);
+		update_history(history, RA);
+	}
 	else if (strcmp(line, "rb") == 0)
+	{
 		rotate_stack(b);
+		update_history(history, RB);
+	}
 	else if (strcmp(line, "rr") == 0)
 	{
 		rotate_stack(a);
 		rotate_stack(b);
+		update_history(history, RR);
 	}
 	else if (strcmp(line, "rra") == 0)
+	{
 		reverse_rotate_stack(a);
+		update_history(history, RRA);
+	}
 	else if (strcmp(line, "rrb") == 0)
+	{
 		reverse_rotate_stack(b);
+		update_history(history, RRB);
+	}
 	else if (strcmp(line, "rrr") == 0)
 	{
 		reverse_rotate_stack(a);
 		reverse_rotate_stack(b);
+		update_history(history, RRR);
 	}
 	else
 		display_error();
