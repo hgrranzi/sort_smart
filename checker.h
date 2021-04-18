@@ -31,6 +31,7 @@
 # define WIN_W 1280
 # define PADDING 10
 # define IMG_PATH "pic/red_space.xpm"
+# define HISTORY_SIZE 10
 
 typedef struct		s_image
 {
@@ -47,6 +48,7 @@ typedef struct	s_data
 {
 	t_stack		*a;
 	t_stack		*b;
+	t_stack		*history;
 	float		stripe_w;
 	float		stripe_h;
 	void		*mlx_p;
