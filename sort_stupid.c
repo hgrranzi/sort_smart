@@ -6,16 +6,38 @@
 
 #include "sort_smart.h"
 
-void	print_cmd(t_stack *stack, char **commands)
+char	**init_commands(char **commands, int size)
+{
+	commands = malloc((size + 1) * sizeof(char *));
+	if (!commands)
+		return (NULL);
+	commands[NOT_CMD] = strdup("");
+	commands[SA] = strdup("sa\n");
+	commands[SB] = strdup("sb\n");
+	commands[SS] = strdup("ss\n");
+	commands[PA] = strdup("pa\n");
+	commands[PB] = strdup("pb\n");
+	commands[RA] = strdup("ra\n");
+	commands[RB] = strdup("rb\n");
+	commands[RR] = strdup("rr\n");
+	commands[RRA] = strdup("rra\n");
+	commands[RRB] = strdup("rrb\n");
+	commands[RRR] = strdup("rrr\n");
+	//here should be a check for all those f
+	return (commands);
+}
+
+void	print_commands(t_stack *stack, char **commands)
 {
 	int	i;
 
 	i = 0;
-	while (i < stack->status - 1)
+	while (i < stack->status)
 	{
-		puts(commands[pop(stack)]);
+		printf("%s", commands[stack->data[i]]);
 		i++;
 	}
+	stack->status = 0;
 }
 
 int		find_min(t_stack *stack)
@@ -56,11 +78,13 @@ void	sort_stupid(t_info *info)
 		}
 		push_top(info->b, info->a);
 		push(info->cmd, PB);
+		print_commands(info->cmd, info->commands);
 	}
+	print_commands(info->cmd, info->commands);
 	while (info->b->status)
 	{
 		push_top(info->a, info->b);
 		push(info->cmd, PA);
 	}
-
+	print_commands(info->cmd, info->commands);
 }

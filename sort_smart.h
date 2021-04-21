@@ -17,6 +17,8 @@ typedef struct	s_info
 	char		**commands;
 }				t_info;
 
+char	**init_commands(char **commands, int size);
+
 void	sort_stupid(t_info *data);
 int		find_min(t_stack *stack);
 
