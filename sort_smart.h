@@ -9,7 +9,15 @@
 
 # include "checker.h"
 
-void	sort_stupid(t_stack *a, t_stack *b);
+typedef struct	s_info
+{
+	t_stack		*a;
+	t_stack		*b;
+	t_stack		*cmd;
+	char		**commands;
+}				t_info;
+
+void	sort_stupid(t_info *data);
 int		find_min(t_stack *stack);
 
 #endif

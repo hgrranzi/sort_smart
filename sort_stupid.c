@@ -40,27 +40,27 @@ int		find_min(t_stack *stack)
 	return (index_min);
 }
 
-void	sort_stupid(t_stack *a, t_stack *b, t_stack *cmd)
+void	sort_stupid(t_info *info)
 {
 	int	index_min;
 
-	index_min = b->status;
-	while (a->status)
+	index_min = info->b->status;
+	while (info->a->status)
 	{
-		index_min = find_min(a);
-		while (index_min < a->status - 1)
+		index_min = find_min(info->a);
+		while (index_min < info->a->status - 1)
 		{
-			push(cmd, RA);
-			rotate_stack(a);
+			push(info->cmd, RA);
+			rotate_stack(info->a);
 			index_min++;
 		}
-		push_top(b, a);
-		push(cmd, PB);
+		push_top(info->b, info->a);
+		push(info->cmd, PB);
 	}
-	while (b->status)
+	while (info->b->status)
 	{
-		push_top(a, b);
-		push(cmd, PA);
+		push_top(info->a, info->b);
+		push(info->cmd, PA);
 	}
 
 }
