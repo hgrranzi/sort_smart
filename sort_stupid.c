@@ -6,6 +6,18 @@
 
 #include "sort_smart.h"
 
+void	print_cmd(t_stack *stack, char **commands)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack->status - 1)
+	{
+		puts(commands[pop(stack)]);
+		i++;
+	}
+}
+
 int		find_min(t_stack *stack)
 {
 	int	i;
@@ -28,7 +40,7 @@ int		find_min(t_stack *stack)
 	return (index_min);
 }
 
-void	sort_stupid(t_stack *a, t_stack *b)
+void	sort_stupid(t_stack *a, t_stack *b, t_stack *cmd)
 {
 	int	index_min;
 
@@ -38,17 +50,17 @@ void	sort_stupid(t_stack *a, t_stack *b)
 		index_min = find_min(a);
 		while (index_min < a->status - 1)
 		{
-			write(1, "ra\n", 3);
+			push(cmd, RA);
 			rotate_stack(a);
 			index_min++;
 		}
 		push_top(b, a);
-		write(1, "pb\n", 3);
+		push(cmd, PB);
 	}
 	while (b->status)
 	{
 		push_top(a, b);
-		write(1, "pa\n", 3);
+		push(cmd, PA);
 	}
 
 }
