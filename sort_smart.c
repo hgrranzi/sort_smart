@@ -66,11 +66,16 @@ void		sort_array(int	*array, int size)
 	}
 }
 
-void		index_stack(t_stack *stack, int *array)
+void		index_stack(t_stack *stack)
 {
+	int		*array;
 	int		i;
 	int		j;
 
+	array = copy_stack_data(stack);
+	if (!array)
+		display_error();
+	sort_array(array, stack->status);
 	i = 0;
 	while (i < stack->status)
 	{
@@ -92,16 +97,11 @@ void		index_stack(t_stack *stack, int *array)
 
 void		sort_clever(t_info *info)
 {
-	int		*tmp;
 	int		i;
 
-	tmp = copy_stack_data(info->a);
-	if (!tmp)
-		display_error();
 	i = 0;
-	sort_array(tmp, info->a->status); // сортируем стек а
-	index_stack(info->a, tmp); // вместо каждого числа в стеке записываем его номер в отсортированной последовательности
-	// находим наибольшую восходящую последовательность, записываем ее границы
+	index_stack(info->a); // вместо каждого числа в стеке записываем его номер в отсортированной последовательности
+	//best_sequence(info->a); // находим наибольшую восходящую последовательность, записываем ее границы
 	// перекидываем в б все кроме последовательности
 		// стоит ли выполнить двойную команду
 		// проверить не расширилась ли последовательность
