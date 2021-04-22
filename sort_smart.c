@@ -6,54 +6,94 @@
 
 #include "sort_smart.h"
 
-t_borders	take_sequence(t_stack *stack, int i)
+int			index_len_max(int *len, int size)
 {
-	t_borders	new_sequence;
+	int		len_max;
+	int		i;
+	int		index;
 
-	new_sequence.start = i;
-	while (i > 0)
+	i = 0;
+	len_max = len[i];
+	while (i < size)
 	{
-		if ((stack->data[i] + 1) > stack->data[i - 1])
-			break ;
+		if (len[i] > len_max)
+		{
+			len_max = len[i];
+			index = i;
+		}
+		i++;
+	}
+	return (index);
+}
+
+void		check_sequence(int *data, int *len, int size)
+{
+	int		i;
+	int		j;
+
+	i = size;
+	while (i >= 0)
+	{
+		len[i] = 1;
+		j = size - 1;
+		while (j >= i + 1)
+		{
+			if ((data[j] < data[i]) && (len[j] + 1 > len[i]))
+				len[i] = len[j] + 1;
+			j--;
+		}
 		i--;
 	}
-	new_sequence.end = i;
-	return (new_sequence);
+}
+
+int		*make_sequence(int *len, int *data, int len_size, int index_max)
+{
+	int		*sequence;
+	int		i;
+	int		j;
+	int		index;
+
+	sequence = malloc(len[index_max] * sizeof(int));
+	if (sequence)
+	{
+		i = index_max;
+		j = 1;
+		index = index_max;
+		sequence[0] = data[index];
+		while (i < len_size)
+		{
+			if ((len[i] == len[index_max] - j) && (data[i] < data[index]))
+			{
+				sequence[j] = data[i];
+				index = i;
+				j++;
+			}
+			i++;
+		}
+	}
+	return (sequence);
 }
 
 void		best_sequence(t_info *info)
 {
-	int		i;
-	t_borders	sequence;
-	t_borders	tmp;
+	int		*len;
+	int		*array;
+	int		*sequence;
 
-	i = info->a->status - 1;
-	sequence.start = info->a->status - 1;
-	sequence.end = info->a->status - 1;
-	while (i >= 0)
-	{
-		tmp = take_sequence(info->a, i);
-		if ((tmp.start - tmp.end) >= (sequence.start - sequence.end))
-			sequence = tmp;
-		i--;
-	}
-
-	i = sequence.start;
-	while (i >= sequence.end)
-	{
-		printf("%d ", info->a->data[i]);
-		i--;
-	}
-	printf("\nborders%d %d", sequence.start, sequence.end);
+	len = malloc(info->a->status * sizeof(int));
+	array = malloc(info->a->status * sizeof(int));
+	if (!len || !array)
+		display_error();
+	check_sequence(info->a->data, len, info->a->status);
+	sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
+	if (!sequence)
+		display_error();
 }
 
 void		sort_clever(t_info *info)
 {
-	int		i;
-
-	i = 0;
 	index_stack(info->a); // given an index to each element of the stack
-	best_sequence(info); // находим наибольшую восходящую последовательность, записываем ее границы
+	best_sequence(info); // находим наибольшую восходящую последовательность
 	// перекидываем в б все кроме последовательности
 		// стоит ли выполнить двойную команду
 		// проверить не расширилась ли последовательность
@@ -61,9 +101,7 @@ void		sort_clever(t_info *info)
 	// находим наибольшую убывающую последовательность
 		// для каждого числа в b считаем количество шагов до нужной позиции в а
 		// выполняем шаги для того, у кого их меньше
-	//print_stack(info->a);
-	//print_stack(info->a);
-	//sort_stupid(info);
+	sort_stupid(info);
 	return ;
 }
 
