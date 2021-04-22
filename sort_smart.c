@@ -6,13 +6,54 @@
 
 #include "sort_smart.h"
 
+t_borders	take_sequence(t_stack *stack, int i)
+{
+	t_borders	new_sequence;
+
+	new_sequence.start = i;
+	while (i > 0)
+	{
+		if ((stack->data[i] + 1) > stack->data[i - 1])
+			break ;
+		i--;
+	}
+	new_sequence.end = i;
+	return (new_sequence);
+}
+
+void		best_sequence(t_info *info)
+{
+	int		i;
+	t_borders	sequence;
+	t_borders	tmp;
+
+	i = info->a->status - 1;
+	sequence.start = info->a->status - 1;
+	sequence.end = info->a->status - 1;
+	while (i >= 0)
+	{
+		tmp = take_sequence(info->a, i);
+		if ((tmp.start - tmp.end) >= (sequence.start - sequence.end))
+			sequence = tmp;
+		i--;
+	}
+
+	i = sequence.start;
+	while (i >= sequence.end)
+	{
+		printf("%d ", info->a->data[i]);
+		i--;
+	}
+	printf("\nborders%d %d", sequence.start, sequence.end);
+}
+
 void		sort_clever(t_info *info)
 {
 	int		i;
 
 	i = 0;
-	index_stack(info->a); // вместо каждого числа в стеке записываем его номер в отсортированной последовательности
-	//best_sequence(info->a); // находим наибольшую восходящую последовательность, записываем ее границы
+	index_stack(info->a); // given an index to each element of the stack
+	best_sequence(info); // находим наибольшую восходящую последовательность, записываем ее границы
 	// перекидываем в б все кроме последовательности
 		// стоит ли выполнить двойную команду
 		// проверить не расширилась ли последовательность
@@ -22,7 +63,7 @@ void		sort_clever(t_info *info)
 		// выполняем шаги для того, у кого их меньше
 	//print_stack(info->a);
 	//print_stack(info->a);
-	sort_stupid(info);
+	//sort_stupid(info);
 	return ;
 }
 
@@ -34,7 +75,7 @@ int			main(int argc, char **argv)
 	t_stack	cmd;
 	char	**commands = NULL;
 
-	info.a = &a; // need to recode the init_stack and creat_stuck f afin de faire присваивание
+	info.a = &a; // need to recode the init_stack and creat_stack f afin de faire присваивание
 	info.b = &b;
 	info.cmd = &cmd;
 	if (argc > 1)

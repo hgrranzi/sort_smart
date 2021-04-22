@@ -17,6 +17,12 @@ typedef struct	s_info
 	char		**commands;
 }				t_info;
 
+typedef struct	s_borders
+{
+	int			start;
+	int			end;
+}				t_borders;
+
 char	**init_commands(char **commands, int size);
 
 void	sort_stupid(t_info *data);
