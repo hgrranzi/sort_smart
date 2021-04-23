@@ -26,7 +26,7 @@ int			index_len_max(int *len, int size)
 	return (index);
 }
 
-void		check_sequence(int *data, int *len, int size)
+int		check_sequence(int *data, int *len, int size)
 {
 	int		i;
 	int		j;
@@ -44,6 +44,7 @@ void		check_sequence(int *data, int *len, int size)
 		}
 		i--;
 	}
+	return (len[index_len_max(len, size)]);
 }
 
 int		*make_sequence(int *len, int *data, int len_size, int index_max)
@@ -74,26 +75,30 @@ int		*make_sequence(int *len, int *data, int len_size, int index_max)
 	return (sequence);
 }
 
-void		best_sequence(t_info *info)
+t_sorted	*best_sequence(t_stack *stack)
 {
-	int		*len;
-	int		*array;
-	int		*sequence;
+	int			*len;
+	t_sorted	*sorted;
 
-	len = malloc(info->a->status * sizeof(int));
-	array = malloc(info->a->status * sizeof(int));
-	if (!len || !array)
+	len = malloc(stack->status * sizeof(int));
+	sorted = malloc(sizeof(t_sorted));
+	if (!len || !sorted)
 		display_error();
-	check_sequence(info->a->data, len, info->a->status);
-	sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
-	if (!sequence)
+	sorted->size = check_sequence(stack->data, len, stack->status);
+	sorted->sequence = make_sequence(len, stack->data, stack->status, index_len_max(len, stack->status));
+	if (!sorted->sequence)
 		display_error();
+	free(len);
+	return (sorted);
 }
 
 void		sort_clever(t_info *info)
 {
+	t_sorted	*sorted;
+
 	index_stack(info->a); // given an index to each element of the stack
-	best_sequence(info); // находим наибольшую восходящую последовательность
+	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
+
 	// перекидываем в б все кроме последовательности
 		// стоит ли выполнить двойную команду
 		// проверить не расширилась ли последовательность
