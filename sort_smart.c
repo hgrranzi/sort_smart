@@ -6,13 +6,50 @@
 
 #include "sort_smart.h"
 
+int			is_in_sequence(t_sorted *sorted, int num)
+{
+	int		i;
+
+	i = 0;
+	while (i < sorted->size)
+	{
+		if (sorted->sequence[i] == num)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void		move_unsorted(t_info *info, t_sorted *sorted)
+{
+	while (info->a->status > sorted->size)
+	{
+		if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]))
+		{
+			push_top(info->b, info->a);
+			push(info->cmd, PB);
+		}
+		rotate_stack(info->a);
+		push(info->cmd, RA);
+	}
+	print_commands(info->cmd, info->commands);
+}
+
 void		sort_clever(t_info *info)
 {
 	t_sorted	*sorted;
 
 	index_stack(info->a); // given an index to each element of the stack
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
-
+	move_unsorted(info, sorted);
+	/*
+	int			i = 0;
+	while (i < sorted->size)
+	{
+		printf("%d ", sorted->sequence[i]);
+		i++;
+	}
+	*/
 	// перекидываем в б все кроме последовательности
 		// стоит ли выполнить двойную команду
 		// проверить не расширилась ли последовательность
@@ -20,7 +57,7 @@ void		sort_clever(t_info *info)
 	// находим наибольшую убывающую последовательность
 		// для каждого числа в b считаем количество шагов до нужной позиции в а
 		// выполняем шаги для того, у кого их меньше
-	sort_stupid(info);
+	//sort_stupid(info);
 	return ;
 }
 
