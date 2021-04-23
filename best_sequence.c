@@ -13,6 +13,7 @@ int			index_len_max(int *len, int size)
 	int		index;
 
 	i = 0;
+	index = 0;
 	len_max = len[i];
 	while (i < size)
 	{
