@@ -47,16 +47,21 @@ int			count_moves(int b_moves, int a_moves)
 int			right_place(t_stack *stack, int num)
 {
 	int		i;
+	int		index_min;
+	int		min;
+	int		max;
 
-	// needs to be recoded
-	if (num > stack->data[0] && stack->data[stack->status - 1] == 0)
-		return (0);
-	if (num > stack->data[stack->status - 1] && num < stack->data[0])
-		return (stack->status - 1);
+	index_min = find_min(stack);
+	min = stack->data[index_min]; // needs to be recoded as find_max
+	max = find_max(stack);
+	if (num > max || num < min)
+		return (index_min);
 	i = stack->status - 1;
+	if (num > stack->data[i] && num < stack->data[0])
+		return (i);
 	while (i >= 0)
 	{
-		if (num > stack->data[i + 1] && (num < stack->data[i] || stack->data[i] == 0))
+		if (num > stack->data[i + 1] && num < stack->data[i])
 			break ;
 		i--;
 	}

@@ -45,6 +45,7 @@ int				is_in_sequence(t_sorted *sorted, int num);
 void			check_swaps(t_info *info, t_sorted *sorted);
 void			check_push(t_info *info, t_sorted *sorted);
 
+int			right_place(t_stack *stack, int num);
 int			count_moves(int b_moves, int a_moves);
 int			moves(t_stack *stack, int index);
 int			max(int a, int b);
