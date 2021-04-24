@@ -11,8 +11,8 @@ MLX = -I mlx -L mlx -lmlx -framework OpenGL -framework AppKit
 SRCS = checker.c checker_cmd.c utils.c stack.c visual.c\
 	get_next_line.c get_next_line_utils.c
 
-SRCS_TWO = sort_smart.c index_stack.c best_sequence.c sort_stupid.c utils.c \
-	checker_cmd.c stack.c get_next_line.c get_next_line_utils.c
+SRCS_TWO = sort_smart.c index_stack.c best_sequence.c move_unsorted.c sort_stupid.c \
+	utils.c checker_cmd.c stack.c get_next_line.c get_next_line_utils.c
 
 OBJS =	$(SRCS:.c=.o)
 
