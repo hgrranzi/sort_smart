@@ -6,6 +6,77 @@
 
 #include "sort_smart.h"
 
+int			positive(int num)
+{
+	if (num < 0)
+		num *= -1;
+	return (num);
+}
+
+int			max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
+
+int			moves(t_stack *stack, int index)
+{
+	int		rot;
+	int		reverse_rot;
+
+	rot = stack->status - 1 - index;
+	reverse_rot = index + 1;
+	if (reverse_rot < rot)
+		return (-reverse_rot);
+	return (rot);
+}
+
+int			count_moves(int b_moves, int a_moves)
+{
+	int		moves;
+
+	if ((b_moves < 0 && a_moves < 0) || (b_moves > 0 && a_moves > 0))
+		moves = max(positive(b_moves), positive(a_moves));
+	else
+		moves = positive(b_moves) + positive(a_moves);
+	return (moves);
+}
+
+int			right_place(t_stack *stack, int num)
+{
+	int		i;
+
+	// needs to be recoded
+	if (num > stack->data[0] && stack->data[stack->status - 1] == 0)
+		return (0);
+	if (num > stack->data[stack->status - 1] && num < stack->data[0])
+		return (stack->status - 1);
+	i = stack->status - 1;
+	while (i >= 0)
+	{
+		if (num > stack->data[i + 1] && (num < stack->data[i] || stack->data[i] == 0))
+			break ;
+		i--;
+	}
+	return (i);
+}
+
+void		move_bestone(t_info *info)
+{
+	int		i;
+	//int		min_moves;
+	//int		current_best;
+
+	i = info->b->status - 1;
+	while (i >= 0)
+	{
+		count_moves(moves(info->b, i), moves((info->a), right_place(info->a, info->b->data[i])));
+		i--;
+	}
+}
+
 void		sort_clever(t_info *info)
 {
 	t_sorted	*sorted;
@@ -13,16 +84,19 @@ void		sort_clever(t_info *info)
 	index_stack(info->a); // given an index to each element of the stack
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
+
+	//print_stack(info->a);
+	//print_stack(info->b);
 	/*
-	int			i = 0;
 	while (i < sorted->size)
 	{
 		printf("%d ", sorted->sequence[i]);
 		i++;
 	}
 	*/
-	// перекидываем обратно в а
-	// находим наибольшую убывающую последовательность
+	// probably from here we dont need our sequence anymore
+	move_bestone(info); // перекидываем обратно в а
+	// находим наибольшую убывающую последовательность ?
 		// для каждого числа в b считаем количество шагов до нужной позиции в а
 		// выполняем шаги для того, у кого их меньше
 	//sort_stupid(info);
