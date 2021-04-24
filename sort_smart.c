@@ -20,6 +20,30 @@ int			is_in_sequence(t_sorted *sorted, int num)
 	return (0);
 }
 
+void		check_push(t_info *info, t_sorted *sorted)
+{
+	int		*len;
+	int		new_sequence_size;
+
+	if (info->b->status)
+	{
+		len = malloc(info->a->status * sizeof(int)); // needs to be freed somehow
+		if (!len)
+			display_error();
+		push_top(info->a, info->b);
+		new_sequence_size = check_sequence(info->a->data, len, info->a->status);
+		if (new_sequence_size > sorted->size)
+		{
+			push(info->cmd, PA);
+			free(sorted->sequence);
+			sorted->size = new_sequence_size;
+			sorted->sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
+		}
+		else
+			push_top(info->b, info->a);
+	}
+}
+
 void		check_swaps(t_info *info, t_sorted *sorted)
 {
 	int		*len;
@@ -32,7 +56,7 @@ void		check_swaps(t_info *info, t_sorted *sorted)
 	new_sequence_size = check_sequence(info->a->data, len, info->a->status); // расширит ли свап последовательность
 	if (new_sequence_size > sorted->size)
 	{
-		if ((info->b->status > 0) && (info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2]))
+		if ((info->b->status > 1) && (info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])) // probably no need
 		{
 			swap_top(info->b);
 			push(info->cmd, SS);
@@ -43,8 +67,8 @@ void		check_swaps(t_info *info, t_sorted *sorted)
 		sorted->size = new_sequence_size;
 		sorted->sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
 	}
-	else if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]) && (info->b->status > 0 && info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])
-	&& (info->a->status > 0 && info->a->data[info->a->status - 1] < info->a->data[info->a->status - 2]))
+	else if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]) && (info->b->status > 1 && info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])
+	&& (info->a->status > 1 && info->a->data[info->a->status - 1] < info->a->data[info->a->status - 2])) // probably no need
 	{
 		swap_top(info->b);
 		push(info->cmd, SS);
@@ -57,10 +81,10 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 {
 	while (info->a->status > sorted->size)
 	{
-		// проверить расширит ли пуш из б в а последовательность
+		check_push(info, sorted);
+		check_swaps(info, sorted); // проверить нужно ли свапнуть а и б
 		if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]))
 		{
-			check_swaps(info, sorted); // проверить нужно ли свапнуть а и б
 			push_top(info->b, info->a);
 			push(info->cmd, PB);
 			print_commands(info->cmd, info->commands);

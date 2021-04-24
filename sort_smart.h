@@ -43,6 +43,7 @@ int				*make_sequence(int *len, int *data, int len_size, int index_max);
 void			move_unsorted(t_info *info, t_sorted *sorted);
 int				is_in_sequence(t_sorted *sorted, int num);
 void			check_swaps(t_info *info, t_sorted *sorted);
+void			check_push(t_info *info, t_sorted *sorted);
 
 
 
