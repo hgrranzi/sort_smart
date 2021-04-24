@@ -92,6 +92,22 @@ void	print_stack(t_stack *stack) // probably will be better with my own printf
 	write(1, "---\n", 4);
 }
 
+int		find_max(t_stack *stack)
+{
+	int	i;
+	int	current_max;
+
+	i = stack->status - 1;
+	current_max = INT32_MIN;
+	while (i >= 0)
+	{
+		if (stack->data[i] > current_max)
+			current_max = stack->data[i];
+		i--;
+	}
+	return (current_max);
+}
+
 void		display_error()
 {
 	write(1, "Error\n", 6);

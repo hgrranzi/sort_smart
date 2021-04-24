@@ -28,22 +28,6 @@ int		press_key(int key, t_data *data)
 	return (0);
 }
 
-int		find_max(t_stack *stack)
-{
-	int	i;
-	int	current_max;
-
-	i = stack->status - 1;
-	current_max = INT32_MIN;
-	while (i >= 0)
-	{
-		if (stack->data[i] > current_max)
-			current_max = stack->data[i];
-		i--;
-	}
-	return (current_max);
-}
-
 void		put_pxl(t_data *data, int x, int y, int color)
 {
 	char	*dst;
