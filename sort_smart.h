@@ -15,6 +15,14 @@ typedef struct	s_sorted
 	int			size;
 }				t_sorted;
 
+typedef struct s_best
+{
+	int			index;
+	int			place;
+	int			b_moves;
+	int			a_moves;
+}				t_best;
+
 typedef struct	s_info
 {
 	t_stack		*a;
