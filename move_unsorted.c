@@ -89,8 +89,11 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 			push(info->cmd, PB);
 			print_commands(info->cmd, info->commands);
 		}
-		rotate_stack(info->a);
-		push(info->cmd, RA);
+		if (info->a->status > sorted->size)
+		{
+			rotate_stack(info->a);
+			push(info->cmd, RA);
+		}
 	}
 	print_commands(info->cmd, info->commands);
 }
