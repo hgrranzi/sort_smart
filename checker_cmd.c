@@ -92,9 +92,9 @@ int			line_to_cmd(char *line)
 		cmd = RR;
 	else if (strcmp(line, "rra") == 0)
 		cmd = RRA;
-	else if (strcmp(line, "RRB") == 0)
+	else if (strcmp(line, "rrb") == 0)
 		cmd = RRB;
-	else if (strcmp(line, "RRR") == 0)
+	else if (strcmp(line, "rrr") == 0)
 		cmd = RRR;
 	else
 		cmd = NOT_CMD;
