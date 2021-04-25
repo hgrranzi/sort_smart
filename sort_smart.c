@@ -21,16 +21,40 @@ int			max(int a, int b)
 		return (b);
 }
 
-int			moves(t_stack *stack, int index) // needs some work with the choise of direction if they re equal
+void		check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves)
 {
-	int		rot;
-	int		reverse_rot;
+	t_moves	rot;
+	t_moves	reverse_rot;
 
-	rot = stack->status - 1 - index;
-	reverse_rot = index + 1;
-	if (reverse_rot < rot)
-		return (-reverse_rot);
-	return (rot);
+	rot.a = a->status - 1 - index.a;
+	reverse_rot.a = index.a + 1;
+	rot.b = b->status - 1 - index.b;
+	reverse_rot.b = index.b + 1;
+
+	if (rot.a > reverse_rot.a)
+	{
+		moves->a = -reverse_rot.a;
+		if (rot.b == reverse_rot.b)
+			moves->b = -reverse_rot.b;
+	}
+	if (rot.a < reverse_rot.a)
+	{
+		moves->a = rot.a;
+		if (rot.b == reverse_rot.b)
+			moves->b = rot.b;
+	}
+	if (rot.b > reverse_rot.b)
+	{
+		moves->b = -reverse_rot.b;
+		if (rot.a == reverse_rot.a)
+			moves->a = -reverse_rot.a;
+	}
+	if (rot.b < reverse_rot.b)
+	{
+		moves->b = rot.b;
+		if (rot.a == reverse_rot.a)
+			moves->a = rot.a;
+	}
 }
 
 int			count_moves(int b_moves, int a_moves)
@@ -68,30 +92,33 @@ int			right_place(t_stack *stack, int num)
 	return (i);
 }
 
-void		find_bestone(t_stack *a, t_stack *b, t_best *bestone) // для каждого числа в b считаем количество шагов до нужной позиции в а
+void		find_bestone(t_stack *a, t_stack *b, t_moves *bestone) // для каждого числа в b считаем количество шагов до нужной позиции в а
 {
-	int		i;
 	int		current_moves;
 	int		min_moves;
+	t_moves	index;
+	t_moves	moves;
 
-	i = b->status - 1;
+	index.b = b->status - 1;
 	min_moves = INT32_MAX;
-	while (i >= 0)
+	while (index.b >= 0)
 	{
-		current_moves = count_moves(moves(b, i), moves((a), right_place(a, b->data[i])));
+		index.a = right_place(a, b->data[index.b]);
+		check_moves(a, b, index, &moves);
+		current_moves = count_moves(moves.b, moves.a);
 		if (current_moves < min_moves)
 		{
 			min_moves = current_moves;
-			bestone->index = i;
+			bestone->a = moves.a;
+			bestone->b = moves.b;
 		}
-		i--;
+		index.b--;
 	}
 }
 
 void		move_bestone(t_info *info)
 {
-	//int		i;
-	t_best	bestone;
+	t_moves	bestone;
 
 	while (info->b->status)
 	{

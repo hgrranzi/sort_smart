@@ -15,13 +15,11 @@ typedef struct	s_sorted
 	int			size;
 }				t_sorted;
 
-typedef struct s_best
+typedef struct s_moves
 {
-	int			index;
-	int			place;
-	int			b_moves;
-	int			a_moves;
-}				t_best;
+	int			a;
+	int			b;
+}				t_moves;
 
 typedef struct	s_info
 {
@@ -53,11 +51,12 @@ int				is_in_sequence(t_sorted *sorted, int num);
 void			check_swaps(t_info *info, t_sorted *sorted);
 void			check_push(t_info *info, t_sorted *sorted);
 
-int			right_place(t_stack *stack, int num);
-int			count_moves(int b_moves, int a_moves);
-int			moves(t_stack *stack, int index);
-int			max(int a, int b);
-int			positive(int num);
+void			find_bestone(t_stack *a, t_stack *b, t_moves *bestone);
+int				right_place(t_stack *stack, int num);
+int				count_moves(int b_moves, int a_moves);
+void			check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves);
+int				max(int a, int b);
+int				positive(int num);
 
 
 
