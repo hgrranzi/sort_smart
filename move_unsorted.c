@@ -66,13 +66,13 @@ void		check_swaps(t_info *info, t_sorted *sorted)
 		free(sorted->sequence);
 		sorted->size = new_sequence_size;
 		sorted->sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
-	}
+	}/*
 	else if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]) && (info->b->status > 1 && info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])
 	&& (info->a->status > 1 && info->a->data[info->a->status - 1] < info->a->data[info->a->status - 2])) // probably no need
 	{
 		swap_top(info->b);
 		push(info->cmd, SS);
-	}
+	}*/
 	else
 		swap_top(info->a);
 }
