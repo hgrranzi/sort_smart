@@ -51,13 +51,15 @@ int				is_in_sequence(t_sorted *sorted, int num);
 void			check_swaps(t_info *info, t_sorted *sorted);
 void			check_push(t_info *info, t_sorted *sorted);
 
+void			move_bestone(t_info *info);
 void			find_bestone(t_stack *a, t_stack *b, t_moves *bestone);
 int				right_place(t_stack *stack, int num);
 int				count_moves(int b_moves, int a_moves);
 void			check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves);
 int				max(int a, int b);
 int				positive(int num);
-
+void			exec_rotate(t_info *info, t_moves *bestone);
+void			exec_reverse_rotate(t_info *info, t_moves *bestone);
 
 
 

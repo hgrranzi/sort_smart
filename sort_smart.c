@@ -19,8 +19,9 @@ int			right_place(t_stack *stack, int num)
 	if (num > max || num < min)
 		return (index_min);
 	i = stack->status - 1;
-	if (num > stack->data[i] && num < stack->data[0])
+	if (num < stack->data[i] && num > stack->data[0])
 		return (i);
+	i = stack->status - 2;
 	while (i >= 0)
 	{
 		if (num > stack->data[i + 1] && num < stack->data[i])
@@ -54,26 +55,94 @@ void		find_bestone(t_stack *a, t_stack *b, t_moves *bestone) // для кажд�
 	}
 }
 
+void		exec_reverse_rotate(t_info *info, t_moves *bestone)
+{
+	while (bestone->a < 0 && bestone->b < 0)
+	{
+		push(info->cmd, RRR);
+		reverse_rotate_stack(info->a);
+		reverse_rotate_stack(info->b);
+		bestone->a++;
+		bestone->b++;
+	}
+	while (bestone->a < 0)
+	{
+		push(info->cmd, RRA);
+		reverse_rotate_stack(info->a);
+		bestone->a++;
+	}
+	while (bestone->b < 0)
+	{
+		push(info->cmd, RRB);
+		reverse_rotate_stack(info->b);
+		bestone->b++;
+	}
+	print_commands(info->cmd, info->commands);
+}
+
+void		exec_rotate(t_info *info, t_moves *bestone)
+{
+	while (bestone->a > 0 && bestone->b > 0)
+	{
+		push(info->cmd, RR);
+		rotate_stack(info->a);
+		rotate_stack(info->b);
+		bestone->a--;
+		bestone->b--;
+	}
+	while (bestone->a > 0)
+	{
+		push(info->cmd, RA);
+		rotate_stack(info->a);
+		bestone->a--;
+	}
+	while (bestone->b > 0)
+	{
+		push(info->cmd, RB);
+		rotate_stack(info->b);
+		bestone->b--;
+	}
+	print_commands(info->cmd, info->commands);
+}
+
 void		move_bestone(t_info *info)
 {
 	t_moves	bestone;
+	int		first_one;
+	int		rot;
+	int		reverse_rot;
 
 	while (info->b->status)
 	{
 		find_bestone(info->a, info->b, &bestone);
-		// выполняем шаги для того, у кого их меньше
+		exec_rotate(info, &bestone); // выполняем шаги для того, у кого их меньше
+		exec_reverse_rotate(info, &bestone);
+		push(info->cmd, PA);
+		push_top(info->a, info->b);
 	}
-
+	print_commands(info->cmd, info->commands);
+	first_one = find_min(info->a);
+	rot = info->a->status - 1 - first_one;
+	reverse_rot = first_one + 1;
+	if (rot > reverse_rot)
+		bestone.a = -reverse_rot;
+	else
+		bestone.a = rot;
+	exec_rotate(info, &bestone);
+	exec_reverse_rotate(info, &bestone);
 }
 
 void		sort_clever(t_info *info)
 {
 	t_sorted	*sorted;
+	int			first_one;
 
 	index_stack(info->a); // given an index to each element of the stack
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
 	move_bestone(info); // перекидываем обратно в а
+	first_one = find_min(info->a);
+
 	//print_stack(info->a);
 	//print_stack(info->b);
 	/*
