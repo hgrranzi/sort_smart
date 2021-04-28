@@ -98,7 +98,7 @@ int		find_max(t_stack *stack)
 	int	current_max;
 
 	i = stack->status - 1;
-	current_max = INT32_MIN;
+	current_max = -INT_MAX;
 	while (i >= 0)
 	{
 		if (stack->data[i] > current_max)

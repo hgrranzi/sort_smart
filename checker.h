@@ -32,6 +32,7 @@
 # define PADDING 10
 # define IMG_PATH "pic/red_space.xpm"
 # define HISTORY_SIZE 16
+# define INT_MAX 2147483647
 
 typedef struct		s_image
 {

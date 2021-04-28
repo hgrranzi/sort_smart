@@ -39,7 +39,7 @@ void		find_bestone(t_stack *a, t_stack *b, t_moves *bestone) // для кажд�
 	t_moves	moves;
 
 	index.b = b->status - 1;
-	min_moves = INT32_MAX;
+	min_moves = INT_MAX;
 	while (index.b >= 0)
 	{
 		index.a = right_place(a, b->data[index.b]);

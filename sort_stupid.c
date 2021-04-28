@@ -47,7 +47,7 @@ int		find_min(t_stack *stack)
 	int	index_min;
 
 	i = stack->status - 1;
-	current_min = INT32_MAX;
+	current_min = INT_MAX;
 	index_min = i;
 
 	while (i >= 0)
