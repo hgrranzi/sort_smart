@@ -106,52 +106,30 @@ int			line_to_cmd(char *line)
 void		exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history)
 {
 	if (cmd == SA)
-	{
 		swap_top(a);
-		update_history(history, SA);
-	}
 	else if (cmd == SB)
-	{
 		swap_top(b);
-		update_history(history, SB);
-	}
 	else if (cmd == SS)
 	{
 		swap_top(a);
 		swap_top(b);
-		update_history(history, SS);
 	}
 	else if (cmd == PA)
-	{
 		push_top(a, b);
-		update_history(history, PA);
-	}
 	else if (cmd == PB)
-	{
 		push_top(b, a);
-		update_history(history, PB);
-	}
 	else if (cmd == RA)
-	{
 		rotate_stack(a);
-		update_history(history, RA);
-	}
 	else if (cmd == RB)
-	{
 		rotate_stack(b);
-		update_history(history, RB);
-	}
 	else if (cmd == RR)
 	{
 		rotate_stack(a);
 		rotate_stack(b);
-		update_history(history, RR);
 	}
 	else if (cmd == RRA)
-	{
 		reverse_rotate_stack(a);
-		update_history(history, RRA);
-	}
+
 	else if (cmd == RRB)
 	{
 		reverse_rotate_stack(b);
@@ -161,10 +139,10 @@ void		exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history)
 	{
 		reverse_rotate_stack(a);
 		reverse_rotate_stack(b);
-		update_history(history, RRR);
 	}
 	else
 		display_error();
+	update_history(history, cmd);
 }
 
 void		exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history, t_stack *forward)
