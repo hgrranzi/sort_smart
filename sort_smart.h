@@ -25,14 +25,8 @@ typedef struct	s_info
 {
 	t_stack		*a;
 	t_stack		*b;
-	t_stack		*cmd;
-	char		**commands;
 }				t_info;
 
-char			**init_commands(char **commands, int size);
-void			print_commands(t_stack *stack, char **commands);
-
-void			sort_stupid(t_info *data);
 int				find_min(t_stack *stack);
 
 void			sort_clever(t_info *info);

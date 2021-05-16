@@ -59,7 +59,7 @@ void		exec_reverse_rotate(t_info *info, t_moves *bestone)
 {
 	while (bestone->a < 0 && bestone->b < 0)
 	{
-		push(info->cmd, RRR);
+		write(1, "rrr\n", 4);
 		reverse_rotate_stack(info->a);
 		reverse_rotate_stack(info->b);
 		bestone->a++;
@@ -67,24 +67,23 @@ void		exec_reverse_rotate(t_info *info, t_moves *bestone)
 	}
 	while (bestone->a < 0)
 	{
-		push(info->cmd, RRA);
+		write(1, "rra\n", 4);
 		reverse_rotate_stack(info->a);
 		bestone->a++;
 	}
 	while (bestone->b < 0)
 	{
-		push(info->cmd, RRB);
+		write(1, "rrb\n", 4);
 		reverse_rotate_stack(info->b);
 		bestone->b++;
 	}
-	print_commands(info->cmd, info->commands);
 }
 
 void		exec_rotate(t_info *info, t_moves *bestone)
 {
 	while (bestone->a > 0 && bestone->b > 0)
 	{
-		push(info->cmd, RR);
+		write(1, "rr\n", 3);
 		rotate_stack(info->a);
 		rotate_stack(info->b);
 		bestone->a--;
@@ -92,17 +91,16 @@ void		exec_rotate(t_info *info, t_moves *bestone)
 	}
 	while (bestone->a > 0)
 	{
-		push(info->cmd, RA);
+		write(1, "ra\n", 3);
 		rotate_stack(info->a);
 		bestone->a--;
 	}
 	while (bestone->b > 0)
 	{
-		push(info->cmd, RB);
+		write(1, "rb\n", 3);
 		rotate_stack(info->b);
 		bestone->b--;
 	}
-	print_commands(info->cmd, info->commands);
 }
 
 void		move_bestone(t_info *info)
@@ -117,10 +115,9 @@ void		move_bestone(t_info *info)
 		find_bestone(info->a, info->b, &bestone);
 		exec_rotate(info, &bestone); // выполняем шаги для того, у кого их меньше
 		exec_reverse_rotate(info, &bestone);
-		push(info->cmd, PA);
+		write(1, "pa\n", 3);
 		push_top(info->a, info->b);
 	}
-	print_commands(info->cmd, info->commands);
 	first_one = find_min(info->a);
 	rot = info->a->status - 1 - first_one;
 	reverse_rot = first_one + 1;
@@ -162,27 +159,17 @@ int			main(int argc, char **argv)
 	t_info	info;
 	t_stack	a;
 	t_stack	b;
-	t_stack	cmd;
-	char	**commands = NULL;
 
 	info.a = &a; // need to recode the init_stack and creat_stack f afin de faire присваивание
 	info.b = &b;
-	info.cmd = &cmd;
 	if (argc > 1)
 	{
 		create_stacks(argv, argc - 1, &a, &b);
 		if (!is_sorted(&a))
-		{
-			cmd.data = init_stack(&cmd, 20 * argc); // that should realloc when necessary or be cleaned
-			info.commands = init_commands(commands, CMD_NUMBER);
-			if (!cmd.data || !info.commands)
-				display_error();
 			sort_clever(&info);
-		}
 		//print_stack(info.a);
 	}
-	free(a.data); // сократить код
+	free(a.data);
 	free(b.data);
-	free(cmd.data);
 	return (0);
 }

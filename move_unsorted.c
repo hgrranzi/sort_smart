@@ -34,7 +34,7 @@ void		check_push(t_info *info, t_sorted *sorted)
 		new_sequence_size = check_sequence(info->a->data, len, info->a->status);
 		if (new_sequence_size > sorted->size)
 		{
-			push(info->cmd, PA);
+			write(1, "pa\n", 3);
 			free(sorted->sequence);
 			sorted->size = new_sequence_size;
 			sorted->sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
@@ -59,10 +59,10 @@ void		check_swaps(t_info *info, t_sorted *sorted)
 		if ((info->b->status > 1) && (info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])) // probably no need
 		{
 			swap_top(info->b);
-			push(info->cmd, SS);
+			write(1, "ss\n", 3);
 		}
 		else
-			push(info->cmd, SA);
+			write(1, "sa\n", 3);
 		free(sorted->sequence);
 		sorted->size = new_sequence_size;
 		sorted->sequence = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
@@ -86,14 +86,12 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 		if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]))
 		{
 			push_top(info->b, info->a);
-			push(info->cmd, PB);
-			print_commands(info->cmd, info->commands);
+			write(1, "pb\n", 3);
 		}
 		if (info->a->status > sorted->size)
 		{
 			rotate_stack(info->a);
-			push(info->cmd, RA);
+			write(1, "ra\n", 3);
 		}
 	}
-	print_commands(info->cmd, info->commands);
 }
