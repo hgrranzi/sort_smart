@@ -60,69 +60,35 @@ void		reverse_rotate_stack(t_stack *stack)
 	}
 }
 
-int			line_to_cmd(char *line)
+void		exec_cmd(char *line, t_stack *a, t_stack *b)
 {
-	int		cmd;
-
 	if (strcmp(line, "sa") == 0)
-		cmd = SA;
+		swap_top(a);
 	else if (strcmp(line, "sb") == 0)
-		cmd = SB;
+		swap_top(b);
 	else if (strcmp(line, "ss") == 0)
-		cmd = SS;
+	{
+		swap_top(a);
+		swap_top(b);
+	}
 	else if (strcmp(line, "pa") == 0)
-		cmd = PA;
-	else if (strcmp(line, "pb") == 0)
-		cmd = PB;
-	else if (strcmp(line, "ra") == 0)
-		cmd = RA;
-	else if (strcmp(line, "rb") == 0)
-		cmd = RB;
-	else if (strcmp(line, "rr") == 0)
-		cmd = RR;
-	else if (strcmp(line, "rra") == 0)
-		cmd = RRA;
-	else if (strcmp(line, "rrb") == 0)
-		cmd = RRB;
-	else if (strcmp(line, "rrr") == 0)
-		cmd = RRR;
-	else
-		cmd = NOT_CMD;
-	free(line);
-	line = NULL;
-	return (cmd);
-}
-
-void		exec_cmd(int cmd, t_stack *a, t_stack *b)
-{
-	if (cmd == SA)
-		swap_top(a);
-	else if (cmd == SB)
-		swap_top(b);
-	else if (cmd == SS)
-	{
-		swap_top(a);
-		swap_top(b);
-	}
-	else if (cmd == PA)
 		push_top(a, b);
-	else if (cmd == PB)
+	else if (strcmp(line, "pb") == 0)
 		push_top(b, a);
-	else if (cmd == RA)
+	else if (strcmp(line, "ra") == 0)
 		rotate_stack(a);
-	else if (cmd == RB)
+	else if (strcmp(line, "rb") == 0)
 		rotate_stack(b);
-	else if (cmd == RR)
+	else if (strcmp(line, "rr") == 0)
 	{
 		rotate_stack(a);
 		rotate_stack(b);
 	}
-	else if (cmd == RRA)
+	else if (strcmp(line, "rra") == 0)
 		reverse_rotate_stack(a);
-
-	else if (cmd == RRB)
+	else if (strcmp(line, "rrb") == 0)
 		reverse_rotate_stack(b);
-	else if (cmd == RRR)
+	else if (strcmp(line, "rrr") == 0)
 	{
 		reverse_rotate_stack(a);
 		reverse_rotate_stack(b);

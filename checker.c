@@ -36,8 +36,6 @@ int			main(int argc, char **argv)
 	{
 		create_stacks(argv, argc - 1, &a, &b);
 		checker(&a, &b);
-		print_stack(&a);
-		print_stack(&b);
 	}
 	return (0);
 }

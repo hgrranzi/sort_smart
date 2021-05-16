@@ -120,10 +120,7 @@ int			run_visual(t_data *data)
 	cmd = 0;
 	fill_background(data);
 	if (data->play && get_next_line(0, &line))
-	{
-		cmd = line_to_cmd(line);
-		exec_cmd(cmd, data->a, data->b);
-	}
+		exec_cmd(line, data->a, data->b);
 	if (data->pause)
 		data->play = 0;
 	draw_stack(data);
