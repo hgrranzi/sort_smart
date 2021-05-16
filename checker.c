@@ -19,7 +19,10 @@ void		checker(t_stack *a, t_stack *b)
 	if (!(data.mlx_p = mlx_init()) || (!(data.win_p = mlx_new_window(data.mlx_p, WIN_W, WIN_W, "checker"))))
 		display_error();
 	get_visual(&data);
+	fill_background(&data);
+	draw_stack(&data);
 	mlx_hook(data.win_p, 2, 1L << 0, press_key, &data);
+	mlx_put_image_to_window(data.mlx_p, data.win_p, data.visual->img, 0, 0);
 	mlx_loop_hook(data.mlx_p, run_visual, &data);
 	mlx_loop(data.mlx_p);
 }
