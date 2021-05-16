@@ -6,16 +6,16 @@
 
 #include "checker.h"
 
-int		aka_isdigit(char c)
+int	aka_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int		aka_atoi(char *str) // need to add max and min int
+int	aka_atoi(char *str) // need to add max and min int
 {
 	long	nbr;
 	long	sign;
-	int	i;
+	int		i;
 
 	nbr = 0;
 	sign = 1;
@@ -59,23 +59,33 @@ void	aka_putnbr(int nbr)
 	}
 }
 
+int	aka_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
 void	create_stacks(char **argv, int i, t_stack *a, t_stack *b)
 {
 	int	nbr;
 
 	if (!(init_stack(a, i - 1)) || (!init_stack(b, i - 1)))
+		display_error();
+	while (i > 0)
+	{
+		nbr = aka_atoi(argv[i]);
+		if (is_duplicate(nbr, a))
 			display_error();
-		while (i > 0)
-		{
-			nbr = aka_atoi(argv[i]);
-			if (is_duplicate(nbr, a))
-				display_error();
-			push(a, nbr);
-			i--;
-		}
+		push(a, nbr);
+		i--;
+	}
 }
 
-void	print_stack(t_stack *stack) // probably will be better with my own printf
+void	print_stack(t_stack *stack)
 {
 	int	i;
 
@@ -92,7 +102,7 @@ void	print_stack(t_stack *stack) // probably will be better with my own printf
 	write(1, "---\n", 4);
 }
 
-int		find_max(t_stack *stack)
+int	find_max(t_stack *stack)
 {
 	int	i;
 	int	current_max;
@@ -108,7 +118,7 @@ int		find_max(t_stack *stack)
 	return (current_max);
 }
 
-int		find_min_min(t_stack *stack)
+int	find_min_min(t_stack *stack)
 {
 	int	i;
 	int	current_min;
@@ -124,7 +134,7 @@ int		find_min_min(t_stack *stack)
 	return (current_min);
 }
 
-void		display_error()
+void	display_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(0);

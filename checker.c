@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		if (strcmp(argv[1], "-v") == 0 && argc > 2)
+		if (aka_strcmp(argv[1], "-v") == 0 && argc > 2)
 		{
 			create_stacks(&argv[1], argc - 2, &a, &b);
 			checker_visual(&a, &b);
