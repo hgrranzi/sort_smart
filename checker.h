@@ -41,14 +41,14 @@ typedef enum e_cmd
 
 typedef struct s_image
 {
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line;
-	int				endian;
-	int				w;
-	int				h;
-}					t_image;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line;
+	int			endian;
+	int			w;
+	int			h;
+}				t_image;
 
 typedef struct s_data
 {
@@ -73,15 +73,15 @@ void			checker(t_stack *a, t_stack *b);
 int				line_to_cmd(char *line);
 void			exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history);
 void			update_history(t_stack *history, int element);
-void			exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history, t_stack *forward);
-
+void			exec_contre_cmd(t_stack *a, t_stack *b,
+					t_stack *history, t_stack *forward);
 void			get_visual(t_data *data);
 int				find_max(t_stack *stack);
 int				press_key(int key, t_data *data);
 int				run_visual(t_data *data);
 void			fill_background(t_data *data);
 void			draw_stack(t_data *data);
-void			draw_stripe(t_data *data, int stripe_h, int start_y, int start_x);
+void			draw_line(t_data *data, int line_h, int start_y, int start_x);
 void			put_pxl(t_data *data, int x, int y, int color);
 unsigned int	*get_texls(t_image *texture, int x, int y);
 

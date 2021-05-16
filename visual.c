@@ -69,7 +69,7 @@ void		fill_background(t_data *data)
 	}
 }
 
-void		draw_stripe(t_data *data, int stripe_h, int start_y, int start_x)
+void		draw_line(t_data *data, int line_h, int start_y, int start_x)
 {
 	int		x;
 	int		y;
@@ -78,12 +78,12 @@ void		draw_stripe(t_data *data, int stripe_h, int start_y, int start_x)
 	y = start_y;
 	x = start_x;
 	i = 0;
-	if (stripe_h < 1)
-		stripe_h = 1;
+	if (line_h < 1)
+		line_h = 1;
 	while (i < data->stripe_w / 2)
 	{
 		y = start_y;
-		while (y > start_y - stripe_h)
+		while (y > start_y - line_h)
 		{
 			put_pxl(data, x, y, 0xf0f8ff);
 			y--;
@@ -102,7 +102,7 @@ void		draw_stack(t_data *data)
 	j = 0;
 	while (i >= 0)
 	{
-		draw_stripe(data, (int)(data->stripe_h * data->b->data[i]), WIN_W / 2 - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
+		draw_line(data, (int)(data->stripe_h * data->b->data[i]), WIN_W / 2 - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
 		i--;
 		j++;
 	}
@@ -110,7 +110,7 @@ void		draw_stack(t_data *data)
 	j = 0;
 	while (i >= 0)
 	{
-		draw_stripe(data, (int)(data->stripe_h * data->a->data[i]), WIN_W - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
+		draw_line(data, (int)(data->stripe_h * data->a->data[i]), WIN_W - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
 		i--;
 		j++;
 	}
