@@ -13,12 +13,7 @@ int		press_key(int key, t_data *data)
 	if (key == 49)
 		data->pause = 0;
 	if (key == 124 || key == 49)
-	{
 		data->play = 1;
-		data->back_history = 0;
-	}
-	else if (key == 123)
-		data->back_history = 1;
 	if (key == 125)
 		data->speed_delay = 1;
 	else if (key == 126)
@@ -124,18 +119,13 @@ int			run_visual(t_data *data)
 	line = NULL;
 	cmd = 0;
 	fill_background(data);
-	if (data->pause && data->back_history)
-		exec_contre_cmd(data->a, data->b, data->history, data->forward);
-	else if (data->play && data->forward->status)
-		exec_cmd(pop(data->forward), data->a, data->b, data->history);
-	else if (data->play && get_next_line(0, &line))
+	if (data->play && get_next_line(0, &line))
 	{
 		cmd = line_to_cmd(line);
-		exec_cmd(cmd, data->a, data->b, data->history);
+		exec_cmd(cmd, data->a, data->b);
 	}
 	if (data->pause)
 		data->play = 0;
-	data->back_history = 0;
 	draw_stack(data);
 	mlx_put_image_to_window(data->mlx_p, data->win_p, data->visual->img, 0, 0);
 	if (data->speed_delay)
@@ -164,5 +154,4 @@ void		get_visual(t_data *data)
 	data->speed_delay = 0;
 	data->play = 1;
 	data->pause = 0;
-	data->back_history = 0;
 }

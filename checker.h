@@ -54,8 +54,6 @@ typedef struct s_data
 {
 	t_stack		*a;
 	t_stack		*b;
-	t_stack		*history;
-	t_stack		*forward;
 	int			factor;
 	float		stripe_w;
 	float		stripe_h;
@@ -65,17 +63,12 @@ typedef struct s_data
 	t_image		*visual;
 	int			play;
 	int			pause;
-	int			back_history;
 	int			speed_delay;
-
 }				t_data;
 
 void			checker(t_stack *a, t_stack *b);
 int				line_to_cmd(char *line);
-void			exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history);
-void			update_history(t_stack *history, int element);
-void			exec_contre_cmd(t_stack *a, t_stack *b,
-					t_stack *history, t_stack *forward);
+void			exec_cmd(int cmd, t_stack *a, t_stack *b);
 void			get_visual(t_data *data);
 int				find_max(t_stack *stack);
 int				press_key(int key, t_data *data);

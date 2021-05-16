@@ -60,16 +60,6 @@ void		reverse_rotate_stack(t_stack *stack)
 	}
 }
 
-void		update_history(t_stack *history, int element)
-{
-	if (is_full(history))
-	{
-		reverse_rotate_stack(history);
-		history->status--;
-	}
-	push(history, element);
-}
-
 int			line_to_cmd(char *line)
 {
 	int		cmd;
@@ -103,7 +93,7 @@ int			line_to_cmd(char *line)
 	return (cmd);
 }
 
-void		exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history)
+void		exec_cmd(int cmd, t_stack *a, t_stack *b)
 {
 	if (cmd == SA)
 		swap_top(a);
@@ -131,10 +121,7 @@ void		exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history)
 		reverse_rotate_stack(a);
 
 	else if (cmd == RRB)
-	{
 		reverse_rotate_stack(b);
-		update_history(history, RRB);
-	}
 	else if (cmd == RRR)
 	{
 		reverse_rotate_stack(a);
@@ -142,46 +129,4 @@ void		exec_cmd(int cmd, t_stack *a, t_stack *b, t_stack *history)
 	}
 	else
 		display_error();
-	update_history(history, cmd);
-}
-
-void		exec_contre_cmd(t_stack *a, t_stack *b, t_stack *history, t_stack *forward)
-{
-	int		cmd;
-
-	if (is_empty(history))
-		return ;
-	cmd = pop(history);
-	if (cmd == SA)
-		swap_top(a);
-	else if (cmd == SB)
-		swap_top(b);
-	else if (cmd == SS)
-	{
-		swap_top(a);
-		swap_top(b);
-	}
-	else if (cmd == PA)
-		push_top(b, a);
-	else if (cmd == PB)
-		push_top(a, b);
-	else if (cmd == RA)
-		reverse_rotate_stack(a);
-	else if (cmd == RB)
-		reverse_rotate_stack(b);
-	else if (cmd == RR)
-	{
-		reverse_rotate_stack(a);
-		reverse_rotate_stack(b);
-	}
-	else if (cmd == RRA)
-		rotate_stack(a);
-	else if (cmd == RRB)
-		rotate_stack(b);
-	else if (cmd == RRR)
-	{
-		rotate_stack(a);
-		rotate_stack(b);
-	}
-	push(forward, cmd);
 }

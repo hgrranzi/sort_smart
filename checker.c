@@ -11,18 +11,13 @@ void		checker(t_stack *a, t_stack *b)
 	t_data	data;
 	t_image	visual;
 	t_image	back;
-	t_stack	history;
-	t_stack	forward;
 
 	data.a = a;
 	data.b = b;
 	data.visual = &visual;
 	data.back = &back;
-	if (!(init_stack(&history, HISTORY_SIZE)) || !(init_stack(&forward, HISTORY_SIZE))
-	|| !(data.mlx_p = mlx_init()) || (!(data.win_p = mlx_new_window(data.mlx_p, WIN_W, WIN_W, "checker"))))
+	if (!(data.mlx_p = mlx_init()) || (!(data.win_p = mlx_new_window(data.mlx_p, WIN_W, WIN_W, "checker"))))
 		display_error();
-	data.history = &history;
-	data.forward = &forward;
 	get_visual(&data);
 	mlx_hook(data.win_p, 2, 1L << 0, press_key, &data);
 	mlx_loop_hook(data.mlx_p, run_visual, &data);
