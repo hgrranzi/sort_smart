@@ -67,6 +67,8 @@ typedef struct s_data
 }				t_data;
 
 void			checker(t_stack *a, t_stack *b);
+void			checker_visual(t_stack *a, t_stack *b);
+
 int				line_to_cmd(char *line);
 void			exec_cmd(char *line, t_stack *a, t_stack *b);
 void			get_visual(t_data *data);

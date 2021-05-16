@@ -6,7 +6,7 @@
 
 #include "checker.h"
 
-void		checker(t_stack *a, t_stack *b)
+void		checker_visual(t_stack *a, t_stack *b)
 {
 	t_data	data;
 	t_image	visual;
@@ -27,6 +27,19 @@ void		checker(t_stack *a, t_stack *b)
 	mlx_loop(data.mlx_p);
 }
 
+void		checker(t_stack *a, t_stack *b)
+{
+	int		readed;
+	char	*line;
+
+	while (get_next_line(0, &line))
+		exec_cmd(line, a, b);
+	if (is_empty(b) && is_sorted(a))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+}
+
 int			main(int argc, char **argv)
 {
 	t_stack	a;
@@ -34,6 +47,11 @@ int			main(int argc, char **argv)
 
 	if (argc > 1)
 	{
+		if (strcmp(argv[1], "-v") == 0 && argc > 2)
+		{
+			create_stacks(&argv[1], argc - 2, &a, &b);
+			checker_visual(&a, &b);
+		}
 		create_stacks(argv, argc - 1, &a, &b);
 		checker(&a, &b);
 	}
