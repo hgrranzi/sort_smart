@@ -9,24 +9,13 @@
 
 # include <stdio.h>
 # include <string.h>
-#include <math.h>
+# include <math.h>
 # include "mlx/mlx.h"
 # include "get_next_line.h"
 # include "utils.h"
 
 # define CMD_NUMBER 11
-# define NOT_CMD 0
-# define SA 1
-# define SB 2
-# define SS 3
-# define PA 4
-# define PB 5
-# define RA 6
-# define RB 7
-# define RR 8
-# define RRA 9
-# define RRB 10
-# define RRR 11
+
 # define SPEED_DELAY 10000
 # define WIN_W 1280
 # define PADDING 10
@@ -34,7 +23,23 @@
 # define HISTORY_SIZE 16
 # define INT_MAX 2147483647
 
-typedef struct		s_image
+typedef enum e_cmd
+{
+	NOT_CMD,
+	SA,
+	SB,
+	SS,
+	PA,
+	PB,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR
+}			t_cmd;
+
+typedef struct s_image
 {
 	void			*img;
 	char			*addr;
@@ -45,7 +50,7 @@ typedef struct		s_image
 	int				h;
 }					t_image;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	t_stack		*a;
 	t_stack		*b;
@@ -63,7 +68,6 @@ typedef struct	s_data
 	int			speed_delay;
 
 }				t_data;
-
 
 void			checker(t_stack *a, t_stack *b);
 int				line_to_cmd(char *line);
