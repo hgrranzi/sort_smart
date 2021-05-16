@@ -56,6 +56,7 @@ typedef struct s_data
 	t_stack		*b;
 	t_stack		*history;
 	t_stack		*forward;
+	int			factor;
 	float		stripe_w;
 	float		stripe_h;
 	void		*mlx_p;

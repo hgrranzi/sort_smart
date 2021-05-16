@@ -102,7 +102,7 @@ void		draw_stack(t_data *data)
 	j = 0;
 	while (i >= 0)
 	{
-		draw_line(data, (int)(data->stripe_h * data->b->data[i]), WIN_W / 2 - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
+		draw_line(data, (int)(data->stripe_h * (data->b->data[i] + data->factor)), WIN_W / 2 - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
 		i--;
 		j++;
 	}
@@ -110,7 +110,7 @@ void		draw_stack(t_data *data)
 	j = 0;
 	while (i >= 0)
 	{
-		draw_line(data, (int)(data->stripe_h * data->a->data[i]), WIN_W - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
+		draw_line(data, (int)(data->stripe_h * (data->a->data[i] + data->factor)), WIN_W - 1 - PADDING, (int)(data->stripe_w * j) + PADDING);
 		i--;
 		j++;
 	}
@@ -159,7 +159,8 @@ void		get_visual(t_data *data)
 	data->back->addr = mlx_get_data_addr(data->back->img,
 		&data->back->bpp, &data->back->line, &data->back->endian);
 	data->stripe_w = (1.0 * WIN_W - 2 * PADDING) / data->a->status;
-	data->stripe_h = ((1.0 * WIN_W - 2 * PADDING) / find_max(data->a)) / 2;
+	data->factor = find_min_min(data->a) * -1;
+	data->stripe_h = ((1.0 * WIN_W - 2 * PADDING) / (find_max(data->a) - find_min_min(data->a))) / 2;
 	data->speed_delay = 0;
 	data->play = 1;
 	data->pause = 0;
