@@ -29,7 +29,6 @@ void	checker_visual(t_stack *a, t_stack *b)
 
 void	checker(t_stack *a, t_stack *b)
 {
-	int		readed;
 	char	*line;
 
 	while (get_next_line(0, &line))
