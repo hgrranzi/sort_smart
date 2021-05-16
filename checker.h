@@ -16,11 +16,10 @@
 
 # define CMD_NUMBER 11
 
-# define SPEED_DELAY 10000
+# define SPEED_DELAY 20000
 # define WIN_W 1280
-# define PADDING 10
+# define PADDING 20
 # define IMG_PATH "pic/red_space.xpm"
-# define HISTORY_SIZE 16
 # define INT_MAX 2147483647
 
 typedef enum e_cmd
