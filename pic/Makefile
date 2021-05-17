@@ -27,7 +27,10 @@ check: $(NAME_ONE)
 
 sort: $(NAME_TWO)
 
-fclean:
+clean:
 	rm -f $(NAME_ONE) $(NAME_TWO)
+
+fclean: clean
+	cd minilibx-linux && make clean
 
 re: fclean re
