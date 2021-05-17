@@ -60,6 +60,7 @@ int				count_moves(int b_moves, int a_moves);
 void			check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves);
 int				max(int a, int b);
 int				positive(int num);
+void			rotate_it(t_info *info);
 void			exec_rotate(t_info *info, t_moves *bestone);
 void			exec_reverse_rotate(t_info *info, t_moves *bestone);
 
