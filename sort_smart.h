@@ -45,8 +45,6 @@ int				is_in_sequence(t_sorted *sorted, int num);
 void			check_swaps(t_info *info, t_sorted *sorted);
 void			check_push(t_info *info, t_sorted *sorted);
 
-void			sort_few(t_info *info);
-void			sort_more(t_info *info);
 void			move_bestone(t_info *info);
 void			find_bestone(t_stack *a, t_stack *b, t_moves *bestone);
 int				right_place(t_stack *stack, int num);
