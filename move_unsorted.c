@@ -77,6 +77,60 @@ void		check_swaps(t_info *info, t_sorted *sorted)
 		swap_top(info->a);
 }
 
+int		choose_rotate(t_stack *a, t_sorted *sorted) // для каждого числа в b считаем количество шагов до нужной позиции в а
+{
+	int		rot;
+	int		reverse_rot;
+	int		i;
+
+	rot = 0;
+	i = a->status - 1;
+	while (is_in_sequence(sorted, a->data[i]))
+		i--;
+	rot = (a->status - 1) - i;
+	i = 0;
+	while (is_in_sequence(sorted, a->data[i]))
+		i++;
+	reverse_rot = 1 + i;
+	if (reverse_rot < rot)
+		return (-reverse_rot);
+	return (rot);
+}
+
+void		rotate_a(t_info *info, int moves)
+{
+	while (moves > 0)
+	{
+		rotate_stack(info->a);
+		push(info->cmd, RA);
+		moves--;
+	}
+	while (moves < 0)
+	{
+		reverse_rotate_stack(info->a);
+		push(info->cmd, RRA);
+		moves++;
+		print_commands(info->cmd, info->commands);
+	}
+	print_commands(info->cmd, info->commands);
+}
+
+void		move_unsorted(t_info *info, t_sorted *sorted)
+{
+	int		moves;
+
+	while (info->a->status > sorted->size)
+	{
+		moves = choose_rotate(info->a, sorted);
+		rotate_a(info, moves);
+		push_top(info->b, info->a);
+		push(info->cmd, PB);
+		print_commands(info->cmd, info->commands);
+	}
+	print_commands(info->cmd, info->commands);
+}
+
+/*
 void		move_unsorted(t_info *info, t_sorted *sorted)
 {
 	while (info->a->status > sorted->size)
@@ -96,4 +150,4 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 		}
 	}
 	print_commands(info->cmd, info->commands);
-}
+}*/

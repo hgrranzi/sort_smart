@@ -15,18 +15,21 @@ void		exec_reverse_rotate(t_info *info, t_moves *bestone)
 		reverse_rotate_stack(info->b);
 		bestone->a++;
 		bestone->b++;
+		print_commands(info->cmd, info->commands);
 	}
 	while (bestone->a < 0)
 	{
 		push(info->cmd, RRA);
 		reverse_rotate_stack(info->a);
 		bestone->a++;
+		print_commands(info->cmd, info->commands);
 	}
 	while (bestone->b < 0)
 	{
 		push(info->cmd, RRB);
 		reverse_rotate_stack(info->b);
 		bestone->b++;
+		print_commands(info->cmd, info->commands);
 	}
 	print_commands(info->cmd, info->commands);
 }
@@ -40,18 +43,21 @@ void		exec_rotate(t_info *info, t_moves *bestone)
 		rotate_stack(info->b);
 		bestone->a--;
 		bestone->b--;
+		print_commands(info->cmd, info->commands);
 	}
 	while (bestone->a > 0)
 	{
 		push(info->cmd, RA);
 		rotate_stack(info->a);
 		bestone->a--;
+		print_commands(info->cmd, info->commands);
 	}
 	while (bestone->b > 0)
 	{
 		push(info->cmd, RB);
 		rotate_stack(info->b);
 		bestone->b--;
+		print_commands(info->cmd, info->commands);
 	}
 	print_commands(info->cmd, info->commands);
 }
