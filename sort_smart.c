@@ -105,22 +105,15 @@ void		exec_rotate(t_info *info, t_moves *bestone)
 	print_commands(info->cmd, info->commands);
 }
 
-void		move_bestone(t_info *info)
+void		rotate_it(t_info *info)
 {
 	t_moves	bestone;
 	int		first_one;
 	int		rot;
 	int		reverse_rot;
 
-	while (info->b->status)
-	{
-		find_bestone(info->a, info->b, &bestone);
-		exec_rotate(info, &bestone); // выполняем шаги для того, у кого их меньше
-		exec_reverse_rotate(info, &bestone);
-		push(info->cmd, PA);
-		push_top(info->a, info->b);
-	}
-	print_commands(info->cmd, info->commands);
+	bestone.a = 0;
+	bestone.b = 0;
 	first_one = find_min(info->a);
 	rot = info->a->status - 1 - first_one;
 	reverse_rot = first_one + 1;
@@ -130,6 +123,24 @@ void		move_bestone(t_info *info)
 		bestone.a = rot;
 	exec_rotate(info, &bestone);
 	exec_reverse_rotate(info, &bestone);
+}
+
+void		move_bestone(t_info *info)
+{
+	t_moves	bestone;
+
+	bestone.a = 0;
+	bestone.b = 0;
+	while (info->b->status)
+	{
+		find_bestone(info->a, info->b, &bestone);
+		exec_rotate(info, &bestone); // выполняем шаги для того, у кого их меньше
+		exec_reverse_rotate(info, &bestone);
+		push(info->cmd, PA);
+		push_top(info->a, info->b);
+	}
+	print_commands(info->cmd, info->commands);
+	rotate_it(info);
 }
 
 void		sort_clever(t_info *info)
