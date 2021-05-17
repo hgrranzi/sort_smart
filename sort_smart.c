@@ -137,10 +137,8 @@ void		sort_clever(t_info *info)
 	t_sorted	*sorted;
 	int			first_one;
 
-	index_stack(info->a); // given an index to each element of the stack
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
-	move_bestone(info); // перекидываем обратно в а
 	first_one = find_min(info->a);
 
 	//print_stack(info->a);
@@ -155,6 +153,29 @@ void		sort_clever(t_info *info)
 	// probably from here we dont need our sequence anymore
 	//sort_stupid(info);
 	return ;
+}
+
+void	sort_few(t_info *info)
+{
+	if (info->a->status == 2
+	|| ((info->a->data[2] > info->a->data[1]) && (info->a->data[2] < info->a->data[0]))
+	|| ((info->a->data[1] > info->a->data[0]) && (info->a->data[1] < info->a->data[2]))
+	|| ((info->a->data[0] > info->a->data[2]) && (info->a->data[0] < info->a->data[1])))
+	{
+		swap_top(info->a);
+		push(info->cmd, SA);
+	}
+}
+
+void	sort_more(t_info *info)
+{
+	while (info->a->status > 3)
+	{
+		push_top(info->b, info->a);
+		push(info->cmd, PB);
+	}
+	sort_few(info);
+	print_commands(info->cmd, info->commands);
 }
 
 int			main(int argc, char **argv)
@@ -177,7 +198,14 @@ int			main(int argc, char **argv)
 			info.commands = init_commands(commands, CMD_NUMBER);
 			if (!cmd.data || !info.commands)
 				display_error();
-			sort_clever(&info);
+			index_stack(info.a); // given an index to each element of the stack
+			if (argc <= 4)
+				sort_few(&info);
+			else if (argc <= 10)
+				sort_more(&info);
+			else
+				sort_clever(&info);
+			move_bestone(&info); // перекидываем обратно в а
 		}
 		//print_stack(info.a);
 	}

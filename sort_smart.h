@@ -36,6 +36,8 @@ void			sort_stupid(t_info *data);
 int				find_min(t_stack *stack);
 
 void			sort_clever(t_info *info);
+void			sort_few(t_info *info);
+void			sort_more(t_info *info);
 
 int				*copy_stack_data(t_stack *stack);
 void			sort_array(int	*array, int size);
