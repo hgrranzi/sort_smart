@@ -76,19 +76,20 @@ int		*make_sequence(int *len, int *data, int len_size, int index_max)
 	return (sequence);
 }
 
-t_sorted	*best_sequence(t_stack *stack)
+t_stack	*best_sequence(t_stack *stack)
 {
 	int			*len;
-	t_sorted	*sorted;
+	t_stack		*sorted_a;
 
 	len = malloc(stack->status * sizeof(int));
-	sorted = malloc(sizeof(t_sorted));
-	if (!len || !sorted)
+	sorted_a = malloc(sizeof(t_stack));
+	if (!len || !sorted_a)
 		display_error();
-	sorted->size = check_sequence(stack->data, len, stack->status);
-	sorted->sequence = make_sequence(len, stack->data, stack->status, index_len_max(len, stack->status));
-	if (!sorted->sequence)
+	sorted_a->size = check_sequence(stack->data, len, stack->status);
+	sorted_a->data = make_sequence(len, stack->data, stack->status, index_len_max(len, stack->status));
+	if (!sorted_a->data)
 		display_error();
+	sorted_a->status = sorted_a->size;
 	free(len);
-	return (sorted);
+	return (sorted_a);
 }

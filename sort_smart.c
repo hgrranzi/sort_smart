@@ -74,7 +74,7 @@ void		move_bestone(t_info *info)
 
 void		sort_clever(t_info *info)
 {
-	t_sorted	*sorted;
+	t_stack	*sorted;
 
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
