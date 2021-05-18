@@ -68,9 +68,7 @@ void		move_bestone(t_info *info)
 		exec_reverse_rotate(info, &bestone);
 		push(info->cmd, PA);
 		push_top(info->a, info->b);
-		print_commands(info->cmd, info->commands);
 	}
-	print_commands(info->cmd, info->commands);
 	rotate_it(info);
 }
 
@@ -115,7 +113,6 @@ void	sort_more(t_info *info)
 		push(info->cmd, PB);
 	}
 	sort_few(info);
-	print_commands(info->cmd, info->commands);
 }
 
 int			main(int argc, char **argv)
@@ -134,7 +131,7 @@ int			main(int argc, char **argv)
 		create_stacks(argv, argc - 1, &a, &b);
 		if (!is_sorted(&a))
 		{
-			cmd.data = init_stack(&cmd, 10 * argc); // that should realloc when necessary or be cleaned
+			cmd.data = init_stack(&cmd, argc); // that should realloc when necessary or be cleaned
 			info.commands = init_commands(commands, CMD_NUMBER);
 			if (!cmd.data || !info.commands)
 				display_error();
@@ -146,11 +143,12 @@ int			main(int argc, char **argv)
 			else
 				sort_clever(&info);
 			move_bestone(&info); // перекидываем обратно в а
+			print_commands(info.cmd, info.commands); // that can be more optimized
 		}
 		//print_stack(info.a);
 	}
-	//free(a.data); // сократить код
-	//free(b.data);
-	//free(cmd.data);
+	free(a.data); // сократить код
+	free(b.data);
+	free(cmd.data);
 	return (0);
 }

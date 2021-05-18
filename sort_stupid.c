@@ -78,9 +78,7 @@ void	sort_stupid(t_info *info)
 		}
 		push_top(info->b, info->a);
 		push(info->cmd, PB);
-		print_commands(info->cmd, info->commands);
 	}
-	print_commands(info->cmd, info->commands);
 	while (info->b->status)
 	{
 		push_top(info->a, info->b);

@@ -132,9 +132,7 @@ void		rotate_a(t_info *info, int moves)
 		reverse_rotate_stack(info->a);
 		push(info->cmd, RRA);
 		moves++;
-		print_commands(info->cmd, info->commands);
 	}
-	print_commands(info->cmd, info->commands);
 }
 
 void		rotate_b(t_info *info, int moves)
@@ -150,9 +148,7 @@ void		rotate_b(t_info *info, int moves)
 		reverse_rotate_stack(info->b);
 		push(info->cmd, RRB);
 		moves++;
-		print_commands(info->cmd, info->commands);
 	}
-	print_commands(info->cmd, info->commands);
 }
 
 void	sort_few_b(t_info *info)
@@ -191,13 +187,12 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 {
 	int		moves;
 
-	while (info->a->status > sorted->size && info->b->status < 3) // только если наберется 3
+	while (info->a->status > sorted->size && info->b->status < 3)
 	{
 		moves = choose_rotate(info->a, sorted);
 		rotate_a(info, moves);
 		push_top(info->b, info->a);
 		push(info->cmd, PB);
-		print_commands(info->cmd, info->commands);
 	}
 	if (info->a->status > sorted->size)
 		initial_sort_b(info);
@@ -207,7 +202,5 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 		rotate_a(info, moves);
 		push_top(info->b, info->a);
 		push(info->cmd, PB);
-		print_commands(info->cmd, info->commands);
 	}
-	print_commands(info->cmd, info->commands);
 }
