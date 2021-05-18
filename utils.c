@@ -133,9 +133,3 @@ int	find_min_min(t_stack *stack)
 	}
 	return (current_min);
 }
-
-void	display_error(void)
-{
-	write(1, "Error\n", 6);
-	exit(0);
-}

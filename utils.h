@@ -18,6 +18,5 @@ void	create_stacks(char **argv, int i, t_stack *a, t_stack *b);
 void	print_stack(t_stack *stack);
 int		find_max(t_stack *stack);
 int		find_min_min(t_stack *stack);
-void	display_error(void);
 
 #endif

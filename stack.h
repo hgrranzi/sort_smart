@@ -8,6 +8,9 @@
 # define STACK_H
 
 # include <stdlib.h>
+# include <unistd.h>
+
+# define PLUS_SIZE 32
 
 typedef struct	s_stack
 {
@@ -24,5 +27,7 @@ int		is_sorted(t_stack *stack);
 void	push(t_stack *stack, int element);
 int		pop(t_stack *stack);
 void	destroy_stack(t_stack *stack);
+
+void	display_error(void);
 
 #endif
