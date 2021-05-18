@@ -6,6 +6,28 @@
 
 #include "sort_smart.h"
 
+int		find_index_max(t_stack *stack)
+{
+	int	i;
+	int	current_max;
+	int	index_max;
+
+	i = stack->status - 1;
+	current_max = -INT_MAX;
+	index_max = i;
+
+	while (i >= 0)
+	{
+		if (stack->data[i] > current_max)
+		{
+			current_max = stack->data[i];
+			index_max = i;
+		}
+		i--;
+	}
+	return (index_max);
+}
+
 int			is_in_sequence(t_sorted *sorted, int num)
 {
 	int		i;
@@ -115,10 +137,70 @@ void		rotate_a(t_info *info, int moves)
 	print_commands(info->cmd, info->commands);
 }
 
+void		rotate_b(t_info *info, int moves)
+{
+	while (moves > 0)
+	{
+		rotate_stack(info->b);
+		push(info->cmd, RB);
+		moves--;
+	}
+	while (moves < 0)
+	{
+		reverse_rotate_stack(info->b);
+		push(info->cmd, RRB);
+		moves++;
+		print_commands(info->cmd, info->commands);
+	}
+	print_commands(info->cmd, info->commands);
+}
+
+void	sort_few_b(t_info *info)
+{
+	if (info->b->status == 2
+	|| ((info->b->data[0] > info->b->data[1]) && (info->b->data[0] < info->b->data[2]))
+	|| ((info->b->data[1] > info->b->data[2]) && (info->b->data[1] < info->b->data[0]))
+	|| ((info->b->data[2] > info->b->data[0]) && (info->b->data[2] < info->b->data[1])))
+	{
+		swap_top(info->b);
+		push(info->cmd, SB);
+	}
+}
+
+void	initial_sort_b(t_info *info)
+{
+	int		first_one_b;
+	t_moves	bestone;
+	int		rot;
+	int		reverse_rot;
+	bestone.a = 0;
+	bestone.b = 0;
+	sort_few_b(info);
+	first_one_b = find_index_max(info->b);
+	rot = info->b->status - 1 - first_one_b;
+	reverse_rot = first_one_b + 1;
+	if (rot > reverse_rot)
+		bestone.b = -reverse_rot;
+	else
+		bestone.b = rot;
+	exec_rotate(info, &bestone);
+	exec_reverse_rotate(info, &bestone);
+}
+
 void		move_unsorted(t_info *info, t_sorted *sorted)
 {
 	int		moves;
 
+	while (info->a->status > sorted->size && info->b->status < 3) // только если наберется 3
+	{
+		moves = choose_rotate(info->a, sorted);
+		rotate_a(info, moves);
+		push_top(info->b, info->a);
+		push(info->cmd, PB);
+		print_commands(info->cmd, info->commands);
+	}
+	if (info->a->status > sorted->size)
+		initial_sort_b(info);
 	while (info->a->status > sorted->size)
 	{
 		moves = choose_rotate(info->a, sorted);
@@ -129,25 +211,3 @@ void		move_unsorted(t_info *info, t_sorted *sorted)
 	}
 	print_commands(info->cmd, info->commands);
 }
-
-/*
-void		move_unsorted(t_info *info, t_sorted *sorted)
-{
-	while (info->a->status > sorted->size)
-	{
-		check_push(info, sorted);
-		check_swaps(info, sorted); // проверить нужно ли свапнуть а и б
-		if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]))
-		{
-			push_top(info->b, info->a);
-			push(info->cmd, PB);
-			print_commands(info->cmd, info->commands);
-		}
-		if (info->a->status > sorted->size)
-		{
-			rotate_stack(info->a);
-			push(info->cmd, RA);
-		}
-	}
-	print_commands(info->cmd, info->commands);
-}*/
