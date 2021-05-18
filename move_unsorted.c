@@ -68,35 +68,22 @@ void		check_push(t_info *info, t_stack *sorted)
 
 void		check_swaps(t_info *info, t_stack *sorted)
 {
-	int		*len;
-	int		new_sequence_size;
+	t_stack	*new_sorted;
 
-	len = malloc(info->a->status * sizeof(int)); // needs to be freed somehow
-	if (!len)
-		display_error();
 	swap_top(info->a);
-	new_sequence_size = check_sequence(info->a->data, len, info->a->status); // расширит ли свап последовательность
-	if (new_sequence_size > sorted->status)
+	new_sorted = best_sequence(info->a);
+	if (new_sorted->status > sorted->status)
 	{
-		if ((info->b->status > 1) && (info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])) // probably no need
-		{
-			swap_top(info->b);
-			push(info->cmd, SS);
-		}
-		else
-			push(info->cmd, SA);
-		free(sorted->data);
-		sorted->status = new_sequence_size;
-		sorted->data = make_sequence(len, info->a->data, info->a->status, index_len_max(len, info->a->status));
-	}/*
-	else if (!is_in_sequence(sorted, info->a->data[info->a->status - 1]) && (info->b->status > 1 && info->b->data[info->b->status - 1] < info->b->data[info->b->status - 2])
-	&& (info->a->status > 1 && info->a->data[info->a->status - 1] < info->a->data[info->a->status - 2])) // probably no need
-	{
-		swap_top(info->b);
-		push(info->cmd, SS);
-	}*/
+		push(info->cmd, SA);
+		//write(1, "ha\n", 3);
+		//destroy_stack(sorted);
+		sorted = new_sorted;
+	}
 	else
+	{
 		swap_top(info->a);
+		//destroy_stack(new_sorted);
+	}
 }
 
 int		choose_rotate(t_stack *a, t_stack *sorted) // для каждого числа в b считаем количество шагов до нужной позиции в а
@@ -163,12 +150,14 @@ void	sort_few_b(t_info *info)
 	}
 }
 
-void	initial_sort_b(t_info *info)
+t_stack	*initial_sort_b(t_info *info)
 {
+	t_stack		*sorted_b;
 	int		first_one_b;
 	t_moves	bestone;
 	int		rot;
 	int		reverse_rot;
+
 	bestone.a = 0;
 	bestone.b = 0;
 	sort_few_b(info);
@@ -181,26 +170,44 @@ void	initial_sort_b(t_info *info)
 		bestone.b = rot;
 	exec_rotate(info, &bestone);
 	exec_reverse_rotate(info, &bestone);
+	sorted_b = malloc(sizeof(t_stack));
+	if (!sorted_b)
+		display_error();
+	sorted_b->data = copy_stack_data(info->b);
+	if (!sorted_b->data)
+		display_error();
+	sorted_b->size = info->b->size;
+	sorted_b->status = info->b->status;
+	return (sorted_b);
 }
 
 void		move_unsorted(t_info *info, t_stack *sorted)
 {
 	int		moves;
+	t_stack *sorted_b;
 
+	sorted_b = NULL;
+	//print_stack(info->a);
+	//check_swaps(info, sorted);
 	while (info->a->status > sorted->size && info->b->status < 3)
 	{
 		moves = choose_rotate(info->a, sorted);
 		rotate_a(info, moves);
 		push_top(info->b, info->a);
 		push(info->cmd, PB);
+		//check_swaps(info, sorted);
 	}
 	if (info->a->status > sorted->size)
-		initial_sort_b(info);
+		sorted_b = initial_sort_b(info);
+	//print_stack(sorted_b);
+	//check_swaps(info, sorted);
 	while (info->a->status > sorted->size)
 	{
 		moves = choose_rotate(info->a, sorted);
 		rotate_a(info, moves);
 		push_top(info->b, info->a);
 		push(info->cmd, PB);
+		//check_swaps(info, sorted);
 	}
+	//print_stack(info->a);
 }
