@@ -56,67 +56,11 @@ void	rotate_a(t_info *info, int moves)
 	}
 }
 
-void	rotate_b(t_info *info, int moves)
-{
-	while (moves > 0)
-	{
-		rotate_stack(info->b);
-		push(info->cmd, RB);
-		moves--;
-	}
-	while (moves < 0)
-	{
-		reverse_rotate_stack(info->b);
-		push(info->cmd, RRB);
-		moves++;
-	}
-}
-
-void	sort_few_b(t_info *info)
-{
-	if (info->b->status == 2
-	|| ((info->b->data[0] > info->b->data[1]) && (info->b->data[0] < info->b->data[2]))
-	|| ((info->b->data[1] > info->b->data[2]) && (info->b->data[1] < info->b->data[0]))
-	|| ((info->b->data[2] > info->b->data[0]) && (info->b->data[2] < info->b->data[1])))
-	{
-		swap_top(info->b);
-		push(info->cmd, SB);
-	}
-}
-
-void	initial_sort_b(t_info *info)
-{
-	int		first_one_b;
-	t_moves	bestone;
-	int		rot;
-	int		reverse_rot;
-	bestone.a = 0;
-	bestone.b = 0;
-	sort_few_b(info);
-	first_one_b = find_index_max(info->b);
-	rot = info->b->status - 1 - first_one_b;
-	reverse_rot = first_one_b + 1;
-	if (rot > reverse_rot)
-		bestone.b = -reverse_rot;
-	else
-		bestone.b = rot;
-	exec_rotate(info, &bestone);
-	exec_reverse_rotate(info, &bestone);
-}
-
 void	move_unsorted(t_info *info, t_stack *sorted)
 {
 	int		moves;
 
-	while (info->a->status > sorted->size && info->b->status < 3)
-	{
-		moves = choose_rotate(info->a, sorted);
-		rotate_a(info, moves);
-		push_top(info->b, info->a);
-		push(info->cmd, PB);
-	}
-	if (info->a->status > sorted->size)
-		initial_sort_b(info);
+	move_bestone_b(info, sorted);
 	while (info->a->status > sorted->size)
 	{
 		moves = choose_rotate(info->a, sorted);

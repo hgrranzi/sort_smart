@@ -55,6 +55,8 @@ void			rotate_it(t_info *info);
 void			exec_rotate(t_info *info, t_moves *bestone);
 void			exec_reverse_rotate(t_info *info, t_moves *bestone);
 
-
+void	move_bestone_b(t_info *info, t_stack *sorted);
+void	find_bestone_b(t_stack *a, t_stack *b, t_moves *bestone, t_stack *sorted);
+int		right_place_b(t_stack *stack, int num);
 
 #endif
