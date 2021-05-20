@@ -57,6 +57,8 @@ int	main(int argc, char **argv)
 		}
 		create_stacks(argv, argc - 1, &a, &b);
 		checker(&a, &b);
+		destroy_stack(&a);
+		destroy_stack(&b);
 	}
 	return (0);
 }
