@@ -72,23 +72,24 @@ void		move_bestone(t_info *info)
 	rotate_it(info);
 }
 
-void		sort_clever_simple(t_info *info)
-{
-	t_stack	*sorted;
-
-	sorted = best_sequence_simple(info->a); // находим наибольшую восходящую последовательность
-	move_unsorted(info, sorted);
-	// probably from here we dont need our sequence anymore
-	return ;
-}
-
 void		sort_clever(t_info *info)
 {
 	t_stack	*sorted;
 
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
+
+	//print_stack(info->a);
+	//print_stack(info->b);
+	/*
+	while (i < sorted->size)
+	{
+		printf("%d ", sorted->sequence[i]);
+		i++;
+	}
+	*/
 	// probably from here we dont need our sequence anymore
+	//sort_stupid(info);
 	return ;
 }
 
@@ -120,7 +121,6 @@ int			main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 	t_stack	cmd;
-	t_stack	tmp_cmd;
 	char	**commands = NULL;
 
 	info.a = &a; // need to recode the init_stack and creat_stack f afin de faire присваивание
@@ -143,22 +143,12 @@ int			main(int argc, char **argv)
 			else
 				sort_clever(&info);
 			move_bestone(&info); // перекидываем обратно в а
-			destroy_stack(&a);
-			destroy_stack(&b);
-			tmp_cmd = cmd;
-			create_stacks(argv, argc - 1, &a, &b);
-			cmd.data = init_stack(&cmd, argc);
-			sort_clever_simple(&info);
-			move_bestone(&info);
-			if (tmp_cmd.status < info.cmd->status)
-				print_commands(&tmp_cmd, info.commands);
-			else
-				print_commands(info.cmd, info.commands); // that can be more optimized
-
+			print_commands(info.cmd, info.commands); // that can be more optimized
 		}
+		//print_stack(info.a);
 	}
-	//free(a.data); // сократить код
-	//free(b.data);
-	//free(cmd.data);
+	free(a.data); // сократить код
+	free(b.data);
+	free(cmd.data);
 	return (0);
 }

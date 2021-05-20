@@ -76,7 +76,7 @@ int		*make_sequence(int *len, int *data, int len_size, int index_max)
 	return (sequence);
 }
 
-t_stack	*best_sequence_simple(t_stack *stack)
+t_stack	*best_sequence(t_stack *stack)
 {
 	int			*len;
 	t_stack		*sorted_a;
@@ -90,37 +90,6 @@ t_stack	*best_sequence_simple(t_stack *stack)
 	if (!sorted_a->data)
 		display_error();
 	sorted_a->status = sorted_a->size;
-	free(len);
-	return (sorted_a);
-}
-
-t_stack	*best_sequence(t_stack *stack)
-{
-	int			*len;
-	t_stack		*sorted_a;
-	int			new_sorted_size;
-	int			i;
-
-	len = malloc(stack->status * sizeof(int));
-	sorted_a = malloc(sizeof(t_stack));
-	if (!len || !sorted_a)
-		display_error();
-	i = 0;
-	sorted_a->size = 0;
-	while (i < stack->status)
-	{
-		new_sorted_size = check_sequence(stack->data, len, stack->status - 1);
-		if (new_sorted_size > sorted_a->size)
-		{
-			sorted_a->data = make_sequence(len, stack->data, stack->status, index_len_max(len, stack->status));
-			if (!sorted_a->data)
-				display_error();
-			sorted_a->size = new_sorted_size;
-			sorted_a->status = sorted_a->size;
-		}
-		i++;
-		rotate_stack(stack);
-	}
 	free(len);
 	return (sorted_a);
 }
