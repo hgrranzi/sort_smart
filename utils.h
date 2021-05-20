@@ -9,6 +9,8 @@
 
 # include "stack.h"
 
+# define INT_MAX 2147483647
+
 int		aka_atoi(char *str);
 int		aka_isdigit(char c);
 void	aka_putchar(char c);

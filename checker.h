@@ -20,7 +20,6 @@
 # define WIN_W 1280
 # define PADDING 20
 # define IMG_PATH "pic/red_space.xpm"
-# define INT_MAX 2147483647
 
 typedef enum e_cmd
 {

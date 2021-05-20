@@ -4,7 +4,7 @@
 /*                                                 */
 /* *********************************************** */
 
-#include "checker.h"
+#include "utils.h"
 
 int	aka_isdigit(char c)
 {
