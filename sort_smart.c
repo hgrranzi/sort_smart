@@ -13,7 +13,7 @@ int			right_place(t_stack *stack, int num)
 	int		min;
 	int		max;
 
-	index_min = find_min(stack);
+	index_min = find_index_min(stack);
 	min = stack->data[index_min];
 	max = find_max(stack);
 	if (num > max || num < min)

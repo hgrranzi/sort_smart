@@ -63,7 +63,7 @@ void		rotate_it(t_info *info)
 
 	bestone.a = 0;
 	bestone.b = 0;
-	first_one = find_min(info->a);
+	first_one = find_index_min(info->a);
 	rot = info->a->status - 1 - first_one;
 	reverse_rot = first_one + 1;
 	if (rot > reverse_rot)

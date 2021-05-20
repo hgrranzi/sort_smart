@@ -40,28 +40,6 @@ void	print_commands(t_stack *stack, char **commands)
 	stack->status = 0;
 }
 
-int		find_min(t_stack *stack)
-{
-	int	i;
-	int	current_min;
-	int	index_min;
-
-	i = stack->status - 1;
-	current_min = INT_MAX;
-	index_min = i;
-
-	while (i >= 0)
-	{
-		if (stack->data[i] < current_min)
-		{
-			current_min = stack->data[i];
-			index_min = i;
-		}
-		i--;
-	}
-	return (index_min);
-}
-
 void	sort_stupid(t_info *info)
 {
 	int	index_min;

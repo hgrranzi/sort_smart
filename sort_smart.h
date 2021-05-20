@@ -27,7 +27,6 @@ char			**init_commands(char **commands, int size);
 void			print_commands(t_stack *stack, char **commands);
 
 void			sort_stupid(t_info *data);
-int				find_min(t_stack *stack);
 
 void			sort_clever(t_info *info);
 void			sort_few(t_info *info);

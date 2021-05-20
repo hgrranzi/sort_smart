@@ -6,28 +6,6 @@
 
 #include "sort_smart.h"
 
-int		find_index_max(t_stack *stack)
-{
-	int	i;
-	int	current_max;
-	int	index_max;
-
-	i = stack->status - 1;
-	current_max = -INT_MAX;
-	index_max = i;
-
-	while (i >= 0)
-	{
-		if (stack->data[i] > current_max)
-		{
-			current_max = stack->data[i];
-			index_max = i;
-		}
-		i--;
-	}
-	return (index_max);
-}
-
 int			is_in_sequence(t_stack *sorted, int num)
 {
 	int		i;

@@ -152,8 +152,8 @@ void		get_visual(t_data *data)
 	data->back->addr = mlx_get_data_addr(data->back->img,
 		&data->back->bpp, &data->back->line, &data->back->endian);
 	data->stripe_w = (1.0 * WIN_W - 2 * PADDING) / data->a->status;
-	data->factor = find_min_min(data->a) * -1;
-	data->stripe_h = ((1.0 * WIN_W - 2 * PADDING) / (find_max(data->a) - find_min_min(data->a))) / 2;
+	data->factor = find_min(data->a) * -1;
+	data->stripe_h = ((1.0 * WIN_W - 2 * PADDING) / (find_max(data->a) - find_min(data->a))) / 2;
 	data->speed_delay = 0;
 	data->play = 1;
 	data->pause = 0;
