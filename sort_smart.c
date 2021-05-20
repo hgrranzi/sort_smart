@@ -51,7 +51,6 @@ void	sort_smart(t_info *info, int stack_size)
 	else
 		sort_clever(info);
 	move_bestone(info); // перекидываем обратно в а
-	print_commands(info->cmd, info->commands); // that can be more optimized
 }
 
 int	main(int argc, char **argv)
@@ -60,6 +59,7 @@ int	main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 	t_stack	cmd;
+	t_stack	cmd_tmp;
 	char	**commands;
 
 	info.a = &a;
@@ -71,13 +71,25 @@ int	main(int argc, char **argv)
 		create_stacks(argv, argc - 1, &a, &b);
 		if (!is_sorted(&a))
 		{
+			info.flag = 0;
 			cmd.data = init_stack(&cmd, argc);
 			info.commands = init_commands(commands, CMD_NUMBER);
 			if (!cmd.data || !info.commands)
 				display_error();
 			sort_smart(&info, argc);
+			info.flag = 1;
+			info.cmd = &cmd_tmp;
+			create_stacks(argv, argc - 1, &a, &b);
+			cmd_tmp.data = init_stack(&cmd_tmp, argc);
+			if (!cmd_tmp.data)
+				display_error();
+			sort_smart(&info, argc);
 		}
 	}
+	if (cmd.status < cmd_tmp.status)
+		print_commands(&cmd, info.commands); // that can be more optimized
+	else
+		print_commands(info.cmd, info.commands);
 	free(a.data); // сократить код
 	free(b.data);
 	free(cmd.data);

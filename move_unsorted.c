@@ -60,7 +60,8 @@ void	move_unsorted(t_info *info, t_stack *sorted)
 {
 	int		moves;
 
-	move_bestone_b(info, sorted);
+	if (info->flag)
+		move_bestone_b(info, sorted);
 	while (info->a->status > sorted->size)
 	{
 		moves = choose_rotate(info->a, sorted);

@@ -21,6 +21,7 @@ typedef struct	s_info
 	t_stack		*b;
 	t_stack		*cmd;
 	char		**commands;
+	int			flag;
 }				t_info;
 
 char			**init_commands(char **commands, int size);
