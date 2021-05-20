@@ -118,6 +118,12 @@ int			run_visual(t_data *data)
 
 	line = NULL;
 	cmd = 0;
+	if (is_empty(data->b) && is_sorted(data->a))
+	{
+		sleep(8);
+		write(1, "OK\n", 3);
+		exit(0);
+	}
 	fill_background(data);
 	if (data->play && get_next_line(0, &line))
 		exec_cmd(line, data->a, data->b);
