@@ -26,8 +26,7 @@ typedef struct	s_info
 char			**init_commands(char **commands, int size);
 void			print_commands(t_stack *stack, char **commands);
 
-void			sort_stupid(t_info *data);
-
+void			sort_smart(t_info *info, int stack_size);
 void			sort_clever(t_info *info);
 void			sort_few(t_info *info);
 void			sort_more(t_info *info);
