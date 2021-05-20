@@ -65,7 +65,7 @@ static int	gnl_end(char **line, char **draft_line)
 	return (0);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char		*buffer;
 	static char	*draft_line;

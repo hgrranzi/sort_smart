@@ -6,7 +6,7 @@
 
 #include "checker.h"
 
-int		press_key(int key, t_data *data)
+int	press_key(int key, t_data *data)
 {
 	if (key == 35)
 		data->pause = 1;
@@ -23,7 +23,7 @@ int		press_key(int key, t_data *data)
 	return (0);
 }
 
-void		put_pxl(t_data *data, int x, int y, int color)
+void	put_pxl(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -35,7 +35,7 @@ void		put_pxl(t_data *data, int x, int y, int color)
 	}
 }
 
-unsigned int		*get_texls(t_image *texture, int x, int y)
+unsigned int	*get_texls(t_image *texture, int x, int y)
 {
 	unsigned int	*color;
 
@@ -44,7 +44,7 @@ unsigned int		*get_texls(t_image *texture, int x, int y)
 	return (color);
 }
 
-void		fill_background(t_data *data)
+void	fill_background(t_data *data)
 {
 	int				x;
 	int				y;
@@ -64,7 +64,7 @@ void		fill_background(t_data *data)
 	}
 }
 
-void		draw_line(t_data *data, int line_h, int start_y, int start_x)
+void	draw_line(t_data *data, int line_h, int start_y, int start_x)
 {
 	int		x;
 	int		y;
@@ -88,7 +88,7 @@ void		draw_line(t_data *data, int line_h, int start_y, int start_x)
 	}
 }
 
-void		draw_stack(t_data *data)
+void	draw_stack(t_data *data)
 {
 	int		i;
 	int		j;
@@ -111,7 +111,7 @@ void		draw_stack(t_data *data)
 	}
 }
 
-int			run_visual(t_data *data)
+int	run_visual(t_data *data)
 {
 	char	*line;
 	int		cmd;
@@ -136,7 +136,7 @@ int			run_visual(t_data *data)
 	return (0);
 }
 
-void		get_visual(t_data *data)
+void	get_visual(t_data *data)
 {
 	int		i;
 

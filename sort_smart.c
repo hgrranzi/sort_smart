@@ -9,9 +9,12 @@
 void	sort_few(t_info *info)
 {
 	if (info->a->status == 2
-	|| ((info->a->data[2] > info->a->data[1]) && (info->a->data[2] < info->a->data[0]))
-	|| ((info->a->data[1] > info->a->data[0]) && (info->a->data[1] < info->a->data[2]))
-	|| ((info->a->data[0] > info->a->data[2]) && (info->a->data[0] < info->a->data[1])))
+		|| ((info->a->data[2] > info->a->data[1])
+			&& (info->a->data[2] < info->a->data[0]))
+		|| ((info->a->data[1] > info->a->data[0])
+			&& (info->a->data[1] < info->a->data[2]))
+		|| ((info->a->data[0] > info->a->data[2])
+			&& (info->a->data[0] < info->a->data[1])))
 	{
 		swap_top(info->a);
 		push(info->cmd, SA);

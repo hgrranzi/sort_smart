@@ -15,7 +15,6 @@
 # include "utils.h"
 
 # define CMD_NUMBER 11
-
 # define SPEED_DELAY 20000
 # define WIN_W 1280
 # define PADDING 20

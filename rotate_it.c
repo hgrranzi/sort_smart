@@ -6,7 +6,7 @@
 
 #include "sort_smart.h"
 
-void		exec_reverse_rotate(t_info *info, t_moves *bestone)
+void	exec_reverse_rotate(t_info *info, t_moves *bestone)
 {
 	while (bestone->a < 0 && bestone->b < 0)
 	{
@@ -30,7 +30,7 @@ void		exec_reverse_rotate(t_info *info, t_moves *bestone)
 	}
 }
 
-void		exec_rotate(t_info *info, t_moves *bestone)
+void	exec_rotate(t_info *info, t_moves *bestone)
 {
 	while (bestone->a > 0 && bestone->b > 0)
 	{
@@ -54,7 +54,7 @@ void		exec_rotate(t_info *info, t_moves *bestone)
 	}
 }
 
-void		rotate_it(t_info *info)
+void	rotate_it(t_info *info)
 {
 	t_moves	bestone;
 	int		first_one;

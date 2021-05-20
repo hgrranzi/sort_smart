@@ -6,7 +6,7 @@
 
 #include "sort_smart.h"
 
-int			*copy_stack_data(t_stack *stack)
+int	*copy_stack_data(t_stack *stack)
 {
 	int		*new_data;
 	int		i;
@@ -22,7 +22,7 @@ int			*copy_stack_data(t_stack *stack)
 	return (new_data);
 }
 
-int			need_swap(int *a, int *b, int flag)
+int	need_swap(int *a, int *b, int flag)
 {
 	int		tmp;
 
@@ -36,7 +36,7 @@ int			need_swap(int *a, int *b, int flag)
 	return (flag);
 }
 
-void		sort_array(int	*array, int size)
+void	sort_array(int	*array, int size)
 {
 	int		start;
 	int		end;
@@ -66,7 +66,7 @@ void		sort_array(int	*array, int size)
 	}
 }
 
-void		index_stack(t_stack *stack)
+void	index_stack(t_stack *stack)
 {
 	int		*array;
 	int		i;

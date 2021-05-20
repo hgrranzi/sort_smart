@@ -6,14 +6,14 @@
 
 #include "sort_smart.h"
 
-int			positive(int num)
+int	positive(int num)
 {
 	if (num < 0)
 		num *= -1;
 	return (num);
 }
 
-int			max(int a, int b)
+int	max(int a, int b)
 {
 	if (a > b)
 		return (a);
@@ -21,7 +21,7 @@ int			max(int a, int b)
 		return (b);
 }
 
-void		check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves)
+void	check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves)
 {
 	t_moves	rot;
 	t_moves	reverse_rot;
@@ -57,7 +57,7 @@ void		check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves)
 	}
 }
 
-int			count_moves(int b_moves, int a_moves)
+int	count_moves(int b_moves, int a_moves)
 {
 	int		moves;
 

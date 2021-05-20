@@ -22,7 +22,7 @@ int	find_max(t_stack *stack)
 	return (current_max);
 }
 
-int		find_index_max(t_stack *stack)
+int	find_index_max(t_stack *stack)
 {
 	int	i;
 	int	current_max;
@@ -60,7 +60,7 @@ int	find_min(t_stack *stack)
 	return (current_min);
 }
 
-int		find_index_min(t_stack *stack)
+int	find_index_min(t_stack *stack)
 {
 	int	i;
 	int	current_min;

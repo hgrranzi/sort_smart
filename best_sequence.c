@@ -6,7 +6,7 @@
 
 #include "sort_smart.h"
 
-int			index_len_max(int *len, int size)
+int	index_len_max(int *len, int size)
 {
 	int		len_max;
 	int		i;
@@ -27,7 +27,7 @@ int			index_len_max(int *len, int size)
 	return (index);
 }
 
-int		check_sequence(int *data, int *len, int size)
+int	check_sequence(int *data, int *len, int size)
 {
 	int		i;
 	int		j;
@@ -48,7 +48,7 @@ int		check_sequence(int *data, int *len, int size)
 	return (len[index_len_max(len, size)]);
 }
 
-int		*make_sequence(int *len, int *data, int len_size, int index_max)
+int	*make_sequence(int *len, int *data, int len_size, int index_max)
 {
 	int		*sequence;
 	int		i;
