@@ -32,7 +32,11 @@ void	checker(t_stack *a, t_stack *b)
 	char	*line;
 
 	while (get_next_line(0, &line))
+	{
 		exec_cmd(line, a, b);
+		free(line);
+	}
+	free(line);
 	if (is_empty(b) && is_sorted(a))
 		write(1, "OK\n", 3);
 	else
