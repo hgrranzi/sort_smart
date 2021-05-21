@@ -11,7 +11,7 @@ int	*copy_stack_data(t_stack *stack)
 	int		*new_data;
 	int		i;
 
-	new_data = malloc(stack->status);
+	new_data = malloc(stack->status * sizeof(int));
 	i = 0;
 	if (new_data)
 		while (i < stack->status)
