@@ -9,6 +9,8 @@
 
 # include "checker.h"
 
+# define DIVISER 50
+
 typedef struct s_moves
 {
 	int			a;

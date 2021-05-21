@@ -90,10 +90,13 @@ int		pop(t_stack *stack)
 
 void	destroy_stack(t_stack *stack)
 {
-	free(stack->data);
-	stack->data = NULL;
-	stack->status = 0;
-	stack->size = 0;
+	if (stack)
+	{
+		free(stack->data);
+		stack->data = NULL;
+		stack->status = 0;
+		stack->size = 0;
+	}
 }
 
 void	display_error(void)
