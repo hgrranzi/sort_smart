@@ -64,10 +64,11 @@ void	move_bestone_b(t_info *info, t_stack *sorted)
 {
 	t_moves	bestone;
 	int		tmp;
-	int		ha = (info->a->status - sorted->status) / 2;
+	int		ha;
 
 	bestone.a = 0;
 	bestone.b = 0;
+	ha = (info->a->status - sorted->status) / info->flag;
 	while (ha)
 	{
 		find_bestone_b(info->b, info->a, &bestone, sorted);

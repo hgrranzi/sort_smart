@@ -71,13 +71,15 @@ int	main(int argc, char **argv)
 		create_stacks(argv, argc - 1, &a, &b);
 		if (!is_sorted(&a))
 		{
-			info.flag = 0;
+			info.flag = 1;
 			cmd.data = init_stack(&cmd, argc);
 			info.commands = init_commands(commands, CMD_NUMBER);
 			if (!cmd.data || !info.commands)
 				display_error();
 			sort_smart(&info, argc);
-			info.flag = 1;
+			destroy_stack(&a);
+			destroy_stack(&b);
+			info.flag = 2;
 			info.cmd = &cmd_tmp;
 			create_stacks(argv, argc - 1, &a, &b);
 			cmd_tmp.data = init_stack(&cmd_tmp, argc);
