@@ -15,6 +15,7 @@ int		aka_atoi(char *str);
 int		aka_isdigit(char c);
 void	aka_putchar(char c);
 void	aka_putnbr(int nbr);
+void	aka_putstr(char *s);
 size_t	aka_strlen(const char *s);
 int		aka_strcmp(const char *s1, const char *s2);
 char	*aka_strdup(const char *s);

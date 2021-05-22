@@ -42,7 +42,7 @@ void	print_commands(t_stack *stack, char **commands)
 	i = 0;
 	while (i < stack->status)
 	{
-		printf("%s", commands[stack->data[i]]);
+		aka_putstr(commands[stack->data[i]]);
 		i++;
 	}
 	stack->status = 0;

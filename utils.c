@@ -60,6 +60,12 @@ void	aka_putnbr(int nbr)
 	}
 }
 
+void	aka_putstr(char *s)
+{
+	if (s)
+		write(1, s, aka_strlen(s));
+}
+
 size_t	aka_strlen(const char *s)
 {
 	size_t	i;

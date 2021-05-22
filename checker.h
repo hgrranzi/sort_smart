@@ -7,8 +7,6 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# include <stdio.h>
-# include <string.h>
 # include <math.h>
 # include "mlx/mlx.h"
 # include "get_next_line.h"
