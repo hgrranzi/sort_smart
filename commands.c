@@ -6,7 +6,7 @@
 
 #include "sort_smart.h"
 
-char	**init_commands(char **commands, int size) // написать свой стрдап!!!
+char	**init_commands(char **commands, int size)
 {
 	int		i;
 
@@ -14,18 +14,18 @@ char	**init_commands(char **commands, int size) // написать свой с�
 	commands = malloc((size + 1) * sizeof(char *));
 	if (!commands)
 		return (NULL);
-	commands[NOT_CMD] = strdup("");
-	commands[SA] = strdup("sa\n");
-	commands[SB] = strdup("sb\n");
-	commands[SS] = strdup("ss\n");
-	commands[PA] = strdup("pa\n");
-	commands[PB] = strdup("pb\n");
-	commands[RA] = strdup("ra\n");
-	commands[RB] = strdup("rb\n");
-	commands[RR] = strdup("rr\n");
-	commands[RRA] = strdup("rra\n");
-	commands[RRB] = strdup("rrb\n");
-	commands[RRR] = strdup("rrr\n");
+	commands[NOT_CMD] = aka_strdup("");
+	commands[SA] = aka_strdup("sa\n");
+	commands[SB] = aka_strdup("sb\n");
+	commands[SS] = aka_strdup("ss\n");
+	commands[PA] = aka_strdup("pa\n");
+	commands[PB] = aka_strdup("pb\n");
+	commands[RA] = aka_strdup("ra\n");
+	commands[RB] = aka_strdup("rb\n");
+	commands[RR] = aka_strdup("rr\n");
+	commands[RRA] = aka_strdup("rra\n");
+	commands[RRB] = aka_strdup("rrb\n");
+	commands[RRR] = aka_strdup("rrr\n");
 	while (i < size)
 	{
 		if (!commands[i])

@@ -60,6 +60,16 @@ void	aka_putnbr(int nbr)
 	}
 }
 
+size_t	aka_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
 int	aka_strcmp(const char *s1, const char *s2)
 {
 	int	i;
@@ -68,6 +78,29 @@ int	aka_strcmp(const char *s1, const char *s2)
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+char	*aka_strdup(const char *s)
+{
+	char	*new_s;
+	int		len;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	len = aka_strlen(s);
+	i = 0;
+	new_s = malloc((len + 1) * sizeof(char));
+	new_s[len] = '\0';
+	if (new_s)
+	{
+		while (s[i])
+		{
+			new_s[i] = s[i];
+			i++;
+		}
+	}
+	return (new_s);
 }
 
 void	create_stacks(char **argv, int i, t_stack *a, t_stack *b)
