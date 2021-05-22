@@ -5,6 +5,7 @@
 /* *********************************************** */
 
 #include "utils.h"
+#include <stdio.h>
 
 int	aka_isdigit(char c)
 {
@@ -20,8 +21,9 @@ int	aka_atoi(char *str) // need to add max and min int
 	nbr = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+	while ((str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
 		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
+		&& aka_isdigit(str[i + 1]))
 		i++;
 	if ((str[i] == '-' || str[i] == '+') && aka_isdigit(str[i + 1]))
 	{
@@ -29,12 +31,12 @@ int	aka_atoi(char *str) // need to add max and min int
 			sign = -1;
 		i++;
 	}
-	while (str[i] && aka_isdigit(str[i]))
+	while (str[i] && aka_isdigit(str[i]) && nbr <= INT_MAX)
 	{
 		nbr = nbr * 10 + str[i] - '0';
 		i++;
 	}
-	if (str[i] != '\0')
+	if (str[i] != '\0' || nbr * sign > INT_MAX || nbr * sign < -INT_MAX - 1)
 		display_error();
 	return ((int)(nbr * sign));
 }
