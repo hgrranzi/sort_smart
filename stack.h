@@ -12,7 +12,7 @@
 
 # define PLUS_SIZE 32
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	int			*data;
 	int			status;

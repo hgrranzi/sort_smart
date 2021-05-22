@@ -6,8 +6,11 @@
 
 #include "sort_smart.h"
 
-char	**init_commands(char **commands, int size)
+char	**init_commands(char **commands, int size) // написать свой стрдап!!!
 {
+	int		i;
+
+	i = 0;
 	commands = malloc((size + 1) * sizeof(char *));
 	if (!commands)
 		return (NULL);
@@ -23,7 +26,12 @@ char	**init_commands(char **commands, int size)
 	commands[RRA] = strdup("rra\n");
 	commands[RRB] = strdup("rrb\n");
 	commands[RRR] = strdup("rrr\n");
-	//here should be a check for all those f
+	while (i < size)
+	{
+		if (!commands[i])
+			return (NULL);
+		i++;
+	}
 	return (commands);
 }
 
@@ -38,4 +46,19 @@ void	print_commands(t_stack *stack, char **commands)
 		i++;
 	}
 	stack->status = 0;
+}
+
+void	destroy_commands(char **commands, int size)
+{
+	int	i;
+
+	i = size - 1;
+	while (i >= 0)
+	{
+		free(commands[i]);
+		commands[i] = NULL;
+		i--;
+	}
+	free(commands);
+	commands = NULL;
 }

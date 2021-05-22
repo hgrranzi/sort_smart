@@ -31,7 +31,6 @@ int	find_index_max(t_stack *stack)
 	i = stack->status - 1;
 	current_max = -INT_MAX;
 	index_max = i;
-
 	while (i >= 0)
 	{
 		if (stack->data[i] > current_max)
@@ -69,7 +68,6 @@ int	find_index_min(t_stack *stack)
 	i = stack->status - 1;
 	current_min = INT_MAX;
 	index_min = i;
-
 	while (i >= 0)
 	{
 		if (stack->data[i] < current_min)

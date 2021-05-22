@@ -14,15 +14,26 @@ int	*copy_stack_data(t_stack *stack)
 	new_data = malloc(stack->status * sizeof(int));
 	i = 0;
 	if (new_data)
+	{
 		while (i < stack->status)
 		{
 			new_data[i] = stack->data[i];
 			i++;
 		}
+	}
 	return (new_data);
 }
 
-int	need_swap(int *a, int *b, int flag)
+void	copy_stack(t_stack *dst, t_stack *src)
+{
+	dst->data = copy_stack_data(src);
+	if (!dst->data)
+		display_error();
+	dst->size = src->status;
+	dst->status = src->status;
+}
+
+static int	need_swap(int *a, int *b, int flag)
 {
 	int		tmp;
 
@@ -36,16 +47,15 @@ int	need_swap(int *a, int *b, int flag)
 	return (flag);
 }
 
-void	sort_array(int	*array, int size)
+void	sort_array(int	*array, int end)
 {
 	int		start;
-	int		end;
 	int		flag;
 	int		i;
 
 	start = 0;
-	end  = size - 1;
 	flag = 1;
+	end--;
 	while ((start < end) && flag)
 	{
 		i = start;

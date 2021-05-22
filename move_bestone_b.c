@@ -31,7 +31,7 @@ int	right_place_b(t_stack *stack, int num)
 	return (i);
 }
 
-void	find_bestone_b(t_stack *a, t_stack *b, t_moves *bestone, t_stack *sorted) // для каждого числа в b считаем количество шагов до нужной позиции в а
+void	find_bestone_b(t_stack *a, t_stack *b, t_moves *bestone, t_stack *sorted)
 {
 	int		current_moves;
 	int		min_moves;
@@ -75,7 +75,7 @@ void	move_bestone_b(t_info *info, t_stack *sorted)
 		tmp = bestone.a;
 		bestone.a = bestone.b;
 		bestone.b = tmp;
-		exec_rotate(info, &bestone); // выполняем шаги для того, у кого их меньше
+		exec_rotate(info, &bestone);
 		exec_reverse_rotate(info, &bestone);
 		push(info->cmd, PB);
 		push_top(info->b, info->a);

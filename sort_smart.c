@@ -6,42 +6,6 @@
 
 #include "sort_smart.h"
 
-void	sort_few(t_info *info)
-{
-	if (info->a->status == 2
-		|| ((info->a->data[2] > info->a->data[1])
-			&& (info->a->data[2] < info->a->data[0]))
-		|| ((info->a->data[1] > info->a->data[0])
-			&& (info->a->data[1] < info->a->data[2]))
-		|| ((info->a->data[0] > info->a->data[2])
-			&& (info->a->data[0] < info->a->data[1])))
-	{
-		swap_top(info->a);
-		push(info->cmd, SA);
-	}
-}
-
-void	sort_more(t_info *info)
-{
-	while (info->a->status > 3)
-	{
-		push_top(info->b, info->a);
-		push(info->cmd, PB);
-	}
-	sort_few(info);
-}
-
-void	sort_clever(t_info *info)
-{
-	t_stack	*sorted;
-
-	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
-	move_unsorted(info, sorted);
-	destroy_stack(sorted);
-	free(sorted);
-	return ;
-}
-
 void	sort_smart(t_info *info, int stack_size)
 {
 	index_stack(info->a); // given an index to each element of the stack
@@ -52,15 +16,6 @@ void	sort_smart(t_info *info, int stack_size)
 	else
 		sort_clever(info);
 	move_bestone(info); // перекидываем обратно в а
-}
-
-void	copy_stack(t_stack *dst, t_stack *src)
-{
-	dst->data = copy_stack_data(src);
-	if (!dst->data)
-		display_error();
-	dst->size = src->status;
-	dst->status = src->status;
 }
 
 void	check_sort(t_info *info, int stack_size, t_stack *cmd_min, t_stack *a_copy)
@@ -104,9 +59,15 @@ void	sort_stack(t_info *info, int stack_size)
 		print_commands(&cmd_min, info->commands);
 		destroy_stack(&cmd_min);
 	}
+	end_sort(info);
+}
+
+void	end_sort(t_info *info)
+{
 	destroy_stack(info->a);
 	destroy_stack(info->b);
 	destroy_stack(info->cmd);
+	destroy_commands(info->commands, CMD_NUMBER);
 }
 
 int	main(int argc, char **argv)

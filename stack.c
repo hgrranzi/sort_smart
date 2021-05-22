@@ -79,11 +79,11 @@ void	push(t_stack *stack, int element)
 	stack->status++;
 }
 
-int		pop(t_stack *stack)
+int	pop(t_stack *stack)
 {
 	int	popped;
 
-	popped = stack->data[stack->status- 1];
+	popped = stack->data[stack->status - 1];
 	stack->status--;
 	return (popped);
 }

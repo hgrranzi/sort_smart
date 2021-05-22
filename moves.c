@@ -30,7 +30,6 @@ void	check_moves(t_stack *a, t_stack *b, t_moves index, t_moves *moves)
 	reverse_rot.a = index.a + 1;
 	rot.b = b->status - 1 - index.b;
 	reverse_rot.b = index.b + 1;
-
 	if (rot.a > reverse_rot.a)
 	{
 		moves->a = -reverse_rot.a;

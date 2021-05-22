@@ -29,9 +29,8 @@ void	put_pxl(t_data *data, int x, int y, int color)
 
 	if (x >= 0 && y >= 0)
 	{
-		dst = data->visual->addr +
-		(y * data->visual->line + x * (data->visual->bpp / 8));
-		*(unsigned int*)dst = color;
+		dst = data->visual->addr + (y * data->visual->line + x * (data->visual->bpp / 8));
+		*(unsigned int *)dst = color;
 	}
 }
 
@@ -39,8 +38,7 @@ unsigned int	*get_texls(t_image *texture, int x, int y)
 {
 	unsigned int	*color;
 
-	color = (unsigned int *)(texture->addr +
-	(y * texture->line + x * (texture->bpp / 8)));
+	color = (unsigned int *)(texture->addr + (y * texture->line + x * (texture->bpp / 8)));
 	return (color);
 }
 
