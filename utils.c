@@ -5,14 +5,13 @@
 /* *********************************************** */
 
 #include "utils.h"
-#include <stdio.h>
 
 int	aka_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	aka_atoi(char *str) // need to add max and min int
+int	aka_atoi(char *str)
 {
 	long	nbr;
 	long	sign;
