@@ -19,7 +19,6 @@ void	sort_few(t_info *info)
 		swap_top(info->a);
 		push(info->cmd, SA);
 	}
-	info->flag = 1;
 }
 
 void	sort_more(t_info *info)
@@ -30,7 +29,6 @@ void	sort_more(t_info *info)
 		push(info->cmd, PB);
 	}
 	sort_few(info);
-	info->flag = 1;
 }
 
 void	sort_clever(t_info *info)
@@ -40,6 +38,7 @@ void	sort_clever(t_info *info)
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
 	destroy_stack(sorted);
+	free(sorted);
 	return ;
 }
 
@@ -101,8 +100,13 @@ void	sort_stack(t_info *info, int stack_size)
 			check_sort(info, stack_size, &cmd_min, &a_copy);
 			info->flag--;
 		}
+		destroy_stack(&a_copy);
 		print_commands(&cmd_min, info->commands);
+		destroy_stack(&cmd_min);
 	}
+	destroy_stack(info->a);
+	destroy_stack(info->b);
+	destroy_stack(info->cmd);
 }
 
 int	main(int argc, char **argv)
