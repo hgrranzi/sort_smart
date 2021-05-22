@@ -23,13 +23,13 @@ int	aka_atoi(char *str) // need to add max and min int
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
 		|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if ((str[i] == '-' || str[i] == '+') && aka_isdigit(str[i + 1]))
 	{
 		if (str[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while (aka_isdigit(str[i]))
+	while (str[i] && aka_isdigit(str[i]))
 	{
 		nbr = nbr * 10 + str[i] - '0';
 		i++;
