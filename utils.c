@@ -36,7 +36,7 @@ int	aka_atoi(char *str) // need to add max and min int
 		nbr = nbr * 10 + str[i] - '0';
 		i++;
 	}
-	if (str[i] != '\0' || nbr * sign > INT_MAX || nbr * sign < -INT_MAX - 1)
+	if (!i || str[i] != '\0' || nbr * sign > INT_MAX || nbr * sign < -INT_MAX - 1)
 		display_error();
 	return ((int)(nbr * sign));
 }
