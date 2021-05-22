@@ -12,7 +12,7 @@ SRCS_ONE = checker.c checker_cmd.c utils.c stack.c visual.c\
 	find_numbers.c get_next_line.c get_next_line_utils.c
 
 SRCS_TWO = sort_smart.c index_stack.c best_sequence.c move_unsorted.c moves.c \
-	rotate_it.c move_bestone_b.c move_bestone.c commands.c utils.c \
+	rotate_it.c move_bestone_b.c move_bestone.c commands.c utils.c sort_clever.c \
 	find_numbers.c checker_cmd.c stack.c get_next_line.c get_next_line_utils.c
 
 OBJS_ONE =	$(SRCS_ONE:.c=.o)
