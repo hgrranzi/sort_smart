@@ -39,7 +39,7 @@ void	sort_clever(t_info *info)
 
 	sorted = best_sequence(info->a); // находим наибольшую восходящую последовательность
 	move_unsorted(info, sorted);
-	// probably from here we dont need our sequence anymore
+	destroy_stack(sorted);
 	return ;
 }
 
