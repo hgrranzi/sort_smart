@@ -60,8 +60,8 @@ This program takes as arguments the stack <b>a</b> formatted as a list of intege
 
 ## Installation
 
-    $>git clone --recurse-submodules https://github.com/hgrranzi/sort_smart.git
-    $>./run.sh
+    git clone --recurse-submodules https://github.com/hgrranzi/sort_smart.git
+    ./run.sh
 
 
 ## Getting started
@@ -77,7 +77,7 @@ to run sort_smart:
 
 to run checker:
 
-    $>./checker 3 2 1 0
+    ./checker 3 2 1 0
     pb
     sa
     rra
@@ -89,7 +89,7 @@ to run both:
 
     ./sort_smart 3 2 1 0 | ./checker 3 2 1 0
     OK
-    $>ARG="3 2 1 0"; ./push_swap $ARG | ./checker_OS $ARG
+    ARG="3 2 1 0"; ./push_swap $ARG | ./checker_OS $ARG
     OK
 
 ## Visualization
