@@ -8,3 +8,5 @@ Learning stack data type and sorting alghoritms
 IN PROGRESS
 
 ## Description
+
+![demo](https://github.com/hgrranzi/sort_smart/blob/main/pic/sort_smart.gif)
