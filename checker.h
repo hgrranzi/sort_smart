@@ -13,8 +13,8 @@
 
 # define CMD_NUMBER 11
 # define SPEED_DELAY 20000
-# define WIN_W 1280
-# define PADDING 20
+# define WIN_W 1080
+# define PADDING 10
 # define IMG_PATH "pic/red_space.xpm"
 
 typedef enum e_cmd
