@@ -21,15 +21,35 @@ is actually sorted and <b>b</b> is empty, then checker displays <b>OK</b> on the
 <table>
   <tr>
     <td> <b>sa</b> </td> <td> swap the first 2 elements at the top of stack a </td>
+  </tr>
+  <tr>
     <td> <b>sb</b> </td> <td> swap the first 2 elements at the top of stack b </td>
+  </tr>
+  <tr>
     <td> <b>ss</b> </td> <td> a and sb at the same time </td>
+  </tr>
+  <tr>
     <td> <b>pa</b> </td> <td> take the first element at the top of b and put it at the top of a </td>
+  </tr>
+  <tr>
     <td> <b>pb</b> </td> <td> stake the first element at the top of a and put it at the top of b </td>
+  </tr>
+  <tr>
     <td> <b>ra</b> </td> <td> shift up all elements of stack a by 1 </td>
+  </tr>
+  <tr>
     <td> <b>rb</b> </td> <td> shift up all elements of stack b by 1 </td>
+  </tr>
+  <tr>
     <td> <b>rr</b> </td> <td> ra and rb at the same time </td>
+  </tr>
+  <tr>
     <td> <b>rra</b> </td> <td> shift down all elements of stack a by 1 </td>
+  </tr>
+  <tr>
     <td> <b>rrb</b> </td> <td> shift down all elements of stack b by 1 </td>
+  </tr>
+  <tr>
     <td> <b>rrr</b> </td> <td> rra and rrb at the same time </td>
   </tr>
 </table>
