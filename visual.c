@@ -123,7 +123,7 @@ int	run_visual(t_data *data)
 		exit(0);
 	}
 	fill_background(data);
-	if (data->play && get_next_line(0, &line))
+	if (data->play && get_cmd(0, &line))
 		exec_cmd(line, data->a, data->b);
 	if (data->pause)
 		data->play = 0;

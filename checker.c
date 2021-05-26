@@ -31,7 +31,7 @@ void	checker(t_stack *a, t_stack *b)
 {
 	char	*line;
 
-	while (get_next_line(0, &line))
+	while (get_cmd(0, &line))
 	{
 		exec_cmd(line, a, b);
 		free(line);

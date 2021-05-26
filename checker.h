@@ -9,7 +9,6 @@
 
 # include <math.h>
 # include "mlx/mlx.h"
-# include "get_next_line.h"
 # include "utils.h"
 
 # define CMD_NUMBER 11
