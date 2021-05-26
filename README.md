@@ -11,7 +11,7 @@ IN PROGRESS
 
 ### checker
 
-This programm takes as arguments the stack <b>a</b> formatted as a list of integers. Then checker wait and read instructions on the standard input.
+This program takes as arguments the stack <b>a</b> formatted as a list of integers. Then checker wait and read instructions on the standard input.
 Once all the instructions have been read, checker executes them on the stack received as an argument. If after executing those instructions, stack <b>a</b>
 is actually sorted and <b>b</b> is empty, then checker displays <b>OK</b> on the standard output. Otherwise checker displays <b>KO</b> on the standard output.
 
@@ -32,6 +32,8 @@ is actually sorted and <b>b</b> is empty, then checker displays <b>OK</b> on the
 </table>
 
 ### sort_smart
+
+This program takes as arguments the stack <b>a</b> formatted as a list of integers and displays the smallest list of instructions possible to sort the stack <b>a</b>.
 
 ## Visualization
 
