@@ -69,8 +69,6 @@ This program takes as arguments the stack <b>a</b> formatted as a list of intege
 to run sort_smart:
 
     ./sort_smart 3 2 1 0
-expected output:
-
     pb
     sa
     rra
@@ -85,16 +83,12 @@ to run checker:
     rra
     pa
     ra
-expected output:
-
     OK
 
 to run both:
 
     ./sort_smart 3 2 1 0 | ./checker 3 2 1 0
     OK
-or
-
     $>ARG="3 2 1 0"; ./push_swap $ARG | ./checker_OS $ARG
     OK
 
