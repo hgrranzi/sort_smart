@@ -52,7 +52,7 @@ void	destroy_commands(char **commands, int size)
 {
 	int	i;
 
-	i = size - 1;
+	i = size;
 	while (i >= 0)
 	{
 		free(commands[i]);

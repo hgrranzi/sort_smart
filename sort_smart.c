@@ -94,6 +94,8 @@ int	main(int argc, char **argv)
 				display_error();
 			sort_stack(&info, argc);
 		}
+		destroy_stack(&a);
+		destroy_stack(&b);
 	}
 	return (0);
 }
