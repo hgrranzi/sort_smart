@@ -116,7 +116,7 @@ int	run_visual(t_data *data)
 
 	line = NULL;
 	cmd = 0;
-	if (is_empty(data->b) && is_sorted(data->a))
+	if (is_empty(data->b) && is_sorted(data->a) && !get_cmd(0, &line))
 	{
 		sleep(8);
 		write(1, "OK\n", 3);
@@ -125,6 +125,8 @@ int	run_visual(t_data *data)
 	fill_background(data);
 	if (data->play && get_cmd(0, &line))
 		exec_cmd(line, data->a, data->b);
+	free(line);
+	line = NULL;
 	if (data->pause)
 		data->play = 0;
 	draw_stack(data);
