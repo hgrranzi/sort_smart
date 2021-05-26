@@ -70,6 +70,7 @@ to run sort_smart:
 
     ./sort_smart 3 2 1 0
 expected output:
+
     pb
     sa
     rra
@@ -77,6 +78,7 @@ expected output:
     ra
 
 to run checker:
+
     $>./checker 3 2 1 0
     pb
     sa
@@ -84,18 +86,22 @@ to run checker:
     pa
     ra
 expected output:
+
     OK
 
 to run both:
+
     ./sort_smart 3 2 1 0 | ./checker 3 2 1 0
     OK
 or
+
     $>ARG="3 2 1 0"; ./push_swap $ARG | ./checker_OS $ARG
     OK
 
 ## Visualization
 
 To get the visualization run the checker program with flag <b>-v</b>:
+
     ./sort_smart 3 2 1 0 | ./checker -v 3 2 1 0
 
 ![demo](https://github.com/hgrranzi/sort_smart/blob/main/pic/sort_smart.gif)
