@@ -9,7 +9,7 @@ MLX = -Iminilibx-linux -Lminilibx-linux
 MLXX = -lmlx -lXext -lX11 ./minilibx-linux/libmlx.a -lm
 
 SRCS_ONE = checker.c checker_cmd.c utils.c stack.c visual.c \
-	find_numbers.c get_cmd.c
+	find_numbers.c get_cmd.c press_key_linux.c
 
 SRCS_TWO = sort_smart.c index_stack.c best_sequence.c move_unsorted.c moves.c \
 	rotate_it.c move_bestone_b.c move_bestone.c commands.c utils.c sort_clever.c \
