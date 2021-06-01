@@ -5,7 +5,7 @@ Creating an effective sorting alghoritm
 
 ## Status
 
-IN PROGRESS
+COMPLETED
 
 ## Description
 
@@ -103,10 +103,10 @@ To get the visualization run the checker program with flag <b>-v</b>:
 Keyboard control
 
 <ul>
-  <li><b>P</b>      pause</li>
-  <li><b>→</b>      move one step forward</li>
-  <li><b>Space</b>  play</li>
-  <li><b>↓</b>      slow down</li>
-  <li><b>↑</b>      accelerate</li>
-  <li><b>Esc</b>    exit</li>
+  <li><b>P</b>:      pause</li>
+  <li><b>→</b>:      move one step forward</li>
+  <li><b>Space</b>:  play</li>
+  <li><b>↓</b>:      slow down</li>
+  <li><b>↑</b>:      accelerate</li>
+  <li><b>Esc</b>:    exit</li>
 </ul>
