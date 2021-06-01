@@ -99,3 +99,14 @@ To get the visualization run the checker program with flag <b>-v</b>:
     ./sort_smart 3 2 1 0 | ./checker -v 3 2 1 0
 
 ![demo](https://github.com/hgrranzi/sort_smart/blob/main/pic/sort_smart.gif)
+
+Keyboard control
+
+<ul>
+  <li><b>P</b> - pause</li>
+  <li><b>→</b> - move one step forward</li>
+  <li><b>Space</b> - play</li>
+  <li><b>↓</b> - slow down</li>
+  <li><b>↑</b> - accelerate</li>
+  <li><b>Esc</b> exit</li>
+</ul>
