@@ -89,7 +89,7 @@ to run both:
 
     ./sort_smart 3 2 1 0 | ./checker 3 2 1 0
     OK
-    ARG="3 2 1 0"; ./push_swap $ARG | ./checker_OS $ARG
+    ARG="3 2 1 0"; ./sort_smart $ARG | ./checker_OS $ARG
     OK
 
 ## Visualization
